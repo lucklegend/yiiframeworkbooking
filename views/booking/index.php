@@ -16,63 +16,63 @@ use yii\web\JsExpression;
 $this->title = 'Booking';
 ?> 
 		<div class="navbar-collapse in nav1">
-      		<ul class="nav navbar-nav">
+      		
+
 			<div class="page-title" style="margin: 10px 0px;">
 				<img height="36" src="img/t/online.gif" width="263">
 									<span class="line-h"></span>
 				<p>Booking For less than 3 days is not allowed for the facilities BBQ Pit, Entertainment Room ,North Function Room, South Function Room </p>
 				<h4>Please select the facilities for book.</h4>
-			</div> 
-					 <li class="dropdown dropdown4" id="moblst" style="color:  #FFF;margin-left: 5px;padding: 5px;width: 190px;">
-        			<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="border-radius: 10px;background-color: #8c6238; color: #FFF;" >
-							 Facility List
-							<span class="caret"></span></a>
-							
-			 				<?php   
-			 
-							echo '<ul class="dropdown-menu">';
-							foreach ($facly as $fav){
-								echo '<li><a href="index.php?r=booking/index&facid='.$fav->id.'" style="color: #FFF;"> '.$fav->name.'</a></li>';
-							}
-							echo '</ul>';
-							?>
-				 </li>
-				<?php
-				// $groups came from BookingController.. 
-				echo '<script>console.log('.json_encode($groups).');</script>';
-				foreach($groups as $group){ 
+			</div>
+			<div class="container" id="facilityMenu">
+				<ul class="nav navbar-nav">
+						<li class="dropdown dropdown4" id="moblst" style="color:  #FFF;margin-left: 5px;padding: 5px;width: 190px;">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#"  style="border-radius: 10px;background-color: #8c6238; color: #FFF;" >
+								Facility List
+								<span class="caret"></span></a>
+								
+								<?php   
 				
-					$groupid = $group['id'];
-				
-					$query = new Query;
-					$query->select(['group'])
-						->from('fb_booking_facility')
-						->where(['group' => $groupid]);
-					$command = $query->createCommand();
-					$group_id = $command->queryScalar();
-				
-					if($groupid == $group_id){
-				 	// if(count($group_id) > 0){
-					  
+								echo '<ul class="dropdown-menu">';
+								foreach ($facly as $fav){
+									echo '<li><a href="index.php?r=booking/index&facid='.$fav->id.'" style="color: #FFF;"> '.$fav->name.'</a></li>';
+								}
+								echo '</ul>';
+								?>
+					</li>
+					<?php
+					// $groups came from BookingController.. 
+					foreach($groups as $group){ 
+						
+						$groupid = $group['id'];
+					
 						$query = new Query;
-						$query->select(['*'])
+						$query->select(['group'])
 							->from('fb_booking_facility')
-							->orderby(['name' => 'ASC'])
 							->where(['group' => $groupid]);
 						$command = $query->createCommand();
-						$facilities = $command->queryAll();
- 
-						foreach($facilities as $facility){  
-							if($facility['group'] == $groupid  ){
-								echo '<a class="btn btn deslstClass"  id="deslst" href="index.php?r=booking/index&facid='.$facility['id'].'"> '.$facility['name'].'</a> ';
-							}
-						}   
+						$group_id = $command->queryScalar();
+					
+						if($groupid == $group_id){					  
+							$query = new Query;
+							$query->select(['*'])
+								->from('fb_booking_facility')
+								->orderby(['name' => 'ASC'])
+								->where(['group' => $groupid]);
+							$command = $query->createCommand();
+							$facilities = $command->queryAll();
+	
+							foreach($facilities as $facility){  
+								if($facility['group'] == $groupid  ){
+									echo '<a class="btn deslstClass"  id="deslst" href="index.php?r=booking/index&facid='.$facility['id'].'"> '.$facility['name'].'</a> ';
+								}
+							}   
+						}
 					}
-				}
-				 
-				 
-				 ?>
+					
+					?>
         </ul>
+			</div>
 
 	</div> 
 
@@ -129,7 +129,7 @@ $this->title = 'Booking';
 				$eve['description'].'<br/>';
 			}
 		}
- 
+
 		echo yii2fullcalendar\yii2fullcalendar::widget([ 
 			'options' => [
 			'lang' => 'en',
@@ -211,9 +211,54 @@ $this->title = 'Booking';
  			</div>
 		</div> 
 	<?php } ?>
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function(){
+		var frameWidth = window.innerWidth;
+		function replaceTHeads(){
+			// rename all data.. in fc-sun, fc-mon, fc-tue, fc-wed, fc-thu, fc-fri, fc-sat
+			var fcSun = $('.fc-head tr td .fc-widget-header table thead tr th.fc-sun').text();
+			var sunDate = fcSun.replace('Sunday', '');
+			$('.fc-head tr td .fc-widget-header table thead tr th.fc-sun').html('Sun '+sunDate);
+
+			var fcMon = $('.fc-head tr td .fc-widget-header table thead tr th.fc-mon').text();
+			var monDate = fcMon.replace('Monday', '');
+			$('.fc-head tr td .fc-widget-header table thead tr th.fc-mon').html('Mon '+monDate);
+			
+			var fcTue = $('.fc-head tr td .fc-widget-header table thead tr th.fc-tue').text();
+			var tueDate = fcTue.replace('Tuesday', '');
+			$('.fc-head tr td .fc-widget-header table thead tr th.fc-tue').html('Tue '+tueDate);
+
+			var fcWed = $('.fc-head tr td .fc-widget-header table thead tr th.fc-wed').text();
+			var wedDate = fcWed.replace('Wednesday', '');
+			$('.fc-head tr td .fc-widget-header table thead tr th.fc-wed').html('Wed '+wedDate);
+
+			var fcThu = $('.fc-head tr td .fc-widget-header table thead tr th.fc-thu').text();
+			var thuDate = fcThu.replace('Thursday', '');
+			$('.fc-head tr td .fc-widget-header table thead tr th.fc-thu').html('Thu '+thuDate);
+
+			var fcFri = $('.fc-head tr td .fc-widget-header table thead tr th.fc-fri').text();
+			var friDate = fcFri.replace('Friday', '');
+			$('.fc-head tr td .fc-widget-header table thead tr th.fc-fri').html('Fri '+friDate);
+
+			var fcSat = $('.fc-head tr td .fc-widget-header table thead tr th.fc-sat').text();
+			var satDate = fcSat.replace('Saturday', '');
+			$('.fc-head tr td .fc-widget-header table thead tr th.fc-sat').html('Sat '+satDate);
+		}
+		if(frameWidth <= 540){
+			replaceTHeads();
+			$('.fc-next-button').click(function(){
+				replaceTHeads();
+			});
+			$('.fc-prev-button').click(function(){
+				replaceTHeads();
+			});
+			
+		}
+	});
+	
+</script>
 <style>
-  
 .BOX_LABEL {
 	float: right;
   background: #FFFFFF;

@@ -170,13 +170,13 @@ $isHome = (($controller->id === 'facilities') && ($controller->action->id === 'i
     </div>
 
     <?php
-      $get = $_SERVER['HTTP_REFERER'];
-      // echo '<script>console.log("'.$get.'");</script>';
-      $loginURL = array(
-        'https://ardmorepark.com.sg/v5/index.php?r=users%2Fguest%2Flogin&1=%2Fuser%2Fsecurity%2Flogin',
-        'https://ardmorepark.com.sg/v5/index.php?r=users%2Fguest%2Flogin'
+      $get = $_SERVER['REQUEST_URI'];
+      echo '<script>console.log("'.$get.'");</script>';
+      $siteURL = array(
+        '/v5/index.php?r=users%2Fguest%2Flogin&1=%2Fuser%2Fsecurity%2Flogin',
+        '/v5/index.php?r=users%2Fguest%2Flogin'
       );
-      if(in_array($get, $loginURL)){
+      if(in_array($get, $siteURL)){
         $col = "col-sm-12 col-md-12 col";
       }else{
         $col = "col-sm-9 col-md-10 col";

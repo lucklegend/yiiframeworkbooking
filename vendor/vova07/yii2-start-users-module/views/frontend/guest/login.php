@@ -25,7 +25,7 @@ $this->title = Module::t('users', 'FRONTEND_LOGIN_TITLE');
 ); ?>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <div class="container" id="login_form" >
-    <div class="form-box check" id="login-box"  style="width:450px;">
+    <div class="form-box check" id="login-box">
         <div class="header">Facility Login</div>
         <div class="body bg-gray">
             <?= $form->field($model, 'username')->textInput(['placeholder' => $model->getAttributeLabel('username')])->label(false) ?>

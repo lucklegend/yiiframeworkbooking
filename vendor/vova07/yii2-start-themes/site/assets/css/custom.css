@@ -114,22 +114,12 @@
 
 
 /* facilities */
-
-
 /* @media only screen and (min-width: 768px) {
     .col1 {
         width: 74.333333%;
     }
 }
-
-
 On smaller screens, decrease text size */
-
-@media only screen and (max-width: 300px) {
-    .text {
-        font-size: 11px
-    }
-}
 
 .row1 {
     text-align: center;
@@ -193,14 +183,9 @@ On smaller screens, decrease text size */
     margin-bottom: 20px;
     background-color: #fdf5e1;
     border-radius: 10px;
-    min-width: 910px;
 }
 
-@media only screen and (min-width: 992px) {
-    .nav1 {
-        min-width: 910px;
-    }
-}
+
 
 .dropdown4 {
     background-color: #8c6238;
@@ -233,11 +218,7 @@ On smaller screens, decrease text size */
     border-radius: 10px;
 }
 
-@media (max-width: 767px) {
-    .navbar1 {
-        width: 90%;
-    }
-}
+
 
 .collapse1 {
     background-color: #8c6238;
@@ -260,9 +241,7 @@ On smaller screens, decrease text size */
 #topnavbar a{
     font-family: 'Muli', sans-serif;
 }
-#topnavbar li.active{
 
-}
 #footer .container{
     max-width: 1224px;
     width: 92%;
@@ -304,7 +283,8 @@ On smaller screens, decrease text size */
 }
 #login-box{
     border-radius: 4px;
-    border: #3f1f01 solid 2px;
+    border: #9a8673 solid 2px;
+    width: 450px;
 }
 /* main */
 
@@ -368,4 +348,46 @@ h6 {
 
 a.fc-event {
 	background-color:#8c6238;
+}
+#welcomeSidebar{
+    text-align:center !important; 
+    width:100%; 
+    line-height:20px; 
+    color:black; 
+    margin-bottom:20px;
+}
+#sidebarMenu{
+    text-align:center !important; 
+    width:100%; 
+    line-height:35px; 
+    color:black;
+}
+#sidebarBtn .icon-bar{
+    background-color: black;
+}
+/* mobile Responsiveness */
+@media only screen and (min-width: 992px) {
+    .nav1 {
+        /* min-width: 910px; */
+    }
+}
+@media (max-width: 767px) {
+    .navbar1 {
+        width: 90%;
+    }
+}
+@media only screen and (max-width: 415px) {
+    #sidebarMenu {
+        position: absolute;
+        padding-top: 11px;
+        z-index: 100;
+    }
+    .navbar-toggle{
+        z-index: 1000;
+    }
+}
+@media only screen and (max-width: 300px) {
+    .text {
+        font-size: 11px
+    }
 }

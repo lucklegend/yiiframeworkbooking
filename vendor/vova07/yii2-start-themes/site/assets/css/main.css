@@ -48,7 +48,7 @@
         border-top: 1px solid #c09853;
     }
     #hdimg {
-        width: 285px !important;
+        width: 255px !important;
     }
     #deslst {
         display: none !important;
@@ -229,6 +229,9 @@
 @media (max-width: 767px) {
     .form-box {
         width: 90%;
+    }
+    #login-box{
+        width: 90%!important;
     }
 }
 
@@ -1086,7 +1089,6 @@ ul.tag-cloud li {
 
 .navbar-inverse .navbar-nav {
     margin-top: -6px;
-    margin-right: -36px;
 }
 
 .navbar-inverse .navbar-nav>li>a {
