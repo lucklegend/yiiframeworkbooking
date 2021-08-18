@@ -1,0 +1,38 @@
+.width-50 {
+    width: 50px;
+}
+
+.boslot {
+	text-align:center;
+	color: #FFF;
+	cursor:not-allowed;
+	background-color: #FF8040;
+}
+
+.naslot {
+	text-align:center;
+	color: #FFF;
+	cursor:not-allowed;
+	background-color:#F00;
+}
+
+.avslot {
+	text-align:center;
+	color: #FFF;
+	cursor:not-allowed;
+	background-color: #004F00;
+}
+
+.peak {
+	text-align:center;
+	color: #FFF;
+	cursor:not-allowed;
+	background-color: #0080FF;
+}
+
+.nonpeak {
+	text-align:center;
+	color: #FFF;
+	cursor:not-allowed;
+	background-color:#004F00;
+}

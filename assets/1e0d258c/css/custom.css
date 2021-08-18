@@ -1,0 +1,315 @@
+@font-face {
+    font-family: 'ItaliannoRegular';
+    src: url('../fonts/Italianno-Regular-OTF-webfont.eot');
+    src: url('../fonts/Italianno-Regular-OTF-webfontd41d.eot?#iefix') format('embedded-opentype'), url('../fonts/Italianno-Regular-OTF-webfont.woff') format('woff'), url('../fonts/Italianno-Regular-OTF-webfont.ttf') format('truetype'), url('../fonts/Italianno-Regular-OTF-webfont.svg#ItaliannoRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.width-50 {
+    width: 50px;
+}
+
+.nav .open>a {
+    background-color: #8c6238 !important;
+}
+
+
+/*edit by kani*/
+
+.nonpeak {
+    background-color: #cbe9c7 !important;
+    color: #000000;
+}
+
+.peak {
+    background-color: #fcddd8 !important;
+    color: #000000;
+}
+
+.brslot {
+    background-color: #dc3333 !important;
+}
+
+.avslot {
+    background-color: #008000;
+}
+
+.clslot {
+    background-color: #f44336 !important;
+    color: #ffffff;
+}
+
+.ybslot {
+    background-color: #7EABF5 !important;
+    color: #ffffff;
+}
+
+.boslot {
+    background-color: #CCC !important;
+    color: #000000;
+    cursor: not-allowed;
+}
+
+.naslot {
+    background-color: #CCC !important;
+    color: #000000;
+    cursor: not-allowed;
+}
+
+.facstac {
+    font-weight: bold;
+    color: #0080C0;
+}
+
+.fc-content .fc-time {
+    display: none;
+}
+
+.fc-content {
+    font-size: 110%;
+    line-height: 19px;
+    text-align: center;
+}
+
+
+/*.fc-body, .fc-agendaWeek-view table {
+	border-collapse:separate !important;
+	border-spacing: auto !important;
+}*/
+
+
+/*
+.fc td, .fc th {
+	border-style:solid;
+	border-width:1px;
+	padding:3px;
+	vertical-align:top
+}*/
+
+.booking-index .navbar-nav>li>a:hover,
+.booking-index .navbar-nav>li>a:active,
+.booking-index .nav .open>a,
+.facility_list .nav .open>a,
+.facility_list .navbar-nav>li>a:hover {
+    background-color: #8c6238 !important;
+    border-radius: 5px;
+}
+
+.nav .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+.booking-index .dropdown-menu>li>a,
+.facility_list .dropdown-menu>li>a {
+    background-color: #8c6238 !important;
+    color: #fff;
+}
+
+.booking-index .dropdown-menu>li,
+.facility_list .dropdown-menu>li {
+    background-color: #8c6238 !important;
+}
+
+
+/* facilities */
+
+
+/* @media only screen and (min-width: 768px) {
+    .col1 {
+        width: 74.333333%;
+    }
+}
+
+
+On smaller screens, decrease text size */
+
+@media only screen and (max-width: 300px) {
+    .text {
+        font-size: 11px
+    }
+}
+
+.row1 {
+    text-align: center;
+}
+
+.col1 {
+    border: 1px solid #c09853;
+    border-radius: 15px;
+    background-color: #efe6d1
+}
+
+.col2 {
+    font-size: 12px;
+    FONT-FAMILY: arial, helvetica, sans-serif;
+    color: #000000;
+}
+
+.col3 {
+    background-color: #c9bc9c;
+    margin: 6px;
+    width: 220px;
+}
+
+.img {
+    margin-top: 15px;
+}
+
+.p {
+    text-align: justify;
+}
+
+
+/* fb-booking-group */
+
+.dropdown1 {
+    background-color: #8c6238 !important;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.img1 {
+    border-radius: 10px;
+    margin: 10px;
+}
+
+
+/* fb-booking-group/facility */
+
+.dropdown3 {
+    background-color: #8c6238 !important;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+
+/* booking */
+
+.nav1 {
+    margin-bottom: 20px;
+    background-color: #fdf5e1;
+    border-radius: 10px;
+    min-width: 910px;
+}
+
+@media only screen and (min-width: 992px) {
+    .nav1 {
+        min-width: 910px;
+    }
+}
+
+.dropdown4 {
+    background-color: #8c6238;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: #8c6238
+}
+
+.h3 {
+    color: #8c6238;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* fb-booking-booked */
+
+.col10 {
+    max-width: 100%;
+    padding: 10px;
+    margin: 10px;
+}
+
+
+/* sidebar */
+
+.header1 {
+    width: 100%;
+    background-color: #8c6238;
+    border-radius: 10px;
+}
+
+@media (max-width: 767px) {
+    .navbar1 {
+        width: 90%;
+    }
+}
+
+.collapse1 {
+    background-color: #8c6238;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+.navbar-inverse {
+    background-color: #8c6238 !important;
+}
+
+
+/* main */
+
+.bgimg {
+    background-image: url(img/top_bg1.gif);
+    height: 88px;
+}
+
+.container1 {
+    background-image: url(img/top_bg1.gif);
+    height: 88px;
+}
+
+.container2 {
+    background-color: #c8bc9b;
+    background-color: #c8bc9b
+}
+
+.container3 {
+    border: 1px solid #c09853;
+    border-radius: 15px;
+    text-align: center;
+    width: 150px;
+    border-top-style: none;
+}
+
+.bg1 {
+    background-image: url(img/lefttopbg.gif);
+    height: 93px;
+    width: 150px;
+}
+
+.leftdecline {
+    text-align: center;
+    font-size: 12px;
+    FONT-FAMILY: arial, helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 20px;
+    font-weight: normal;
+    font-family: 'Italianno' !important;
+    /* font-family: 'ItaliannoRegular', Arial, sans-serif, Helvetica; */
+    color: #ac7339;
+    /* font-style: oblique; */
+}
+
+.navbar-collapse {
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.tab-height-lg .tab-content {
+	height:auto !important;
+}
+
+a.fc-event {
+	background-color:#8c6238;
+}

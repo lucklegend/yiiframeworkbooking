@@ -1,0 +1,114 @@
+[26-Aug-2020 18:17:43 Asia/Singapore] PHP Fatal error:  Call to a member function delete() on null in /home/ardmorep/public_html/v5/vendor/sadovojav/yii2-gallery-module/controllers/GalleryController.php on line 124
+[29-Aug-2020 14:37:41 Asia/Singapore] PHP Parse error:  syntax error, unexpected end of file, expecting ']' in /home/ardmorep/public_html/v5/backend/views/fb-booking-facility/view.php on line 302
+[29-Aug-2020 14:38:01 Asia/Singapore] PHP Parse error:  syntax error, unexpected end of file, expecting ']' in /home/ardmorep/public_html/v5/backend/views/fb-booking-facility/view.php on line 302
+[29-Aug-2020 14:38:06 Asia/Singapore] PHP Parse error:  syntax error, unexpected end of file, expecting ']' in /home/ardmorep/public_html/v5/backend/views/fb-booking-facility/view.php on line 302
+[01-Sep-2020 15:19:22 Asia/Singapore] PHP Parse error:  syntax error, unexpected '<' in /home/ardmorep/public_html/v5/backend/views/fb-booking-slot/view1.php on line 20
+[27-Oct-2020 15:57:33 Asia/Singapore] PHP Warning:  file_put_contents(): Only 0 of 86543 bytes written, possibly out of free disk space in /home/ardmorep/public_html/v5/vendor/yiisoft/yii2-debug/LogTarget.php on line 57
+[27-Oct-2020 15:58:13 Asia/Singapore] PHP Warning:  file_put_contents(): Only 0 of 72755 bytes written, possibly out of free disk space in /home/ardmorep/public_html/v5/vendor/yiisoft/yii2-debug/LogTarget.php on line 57
+[27-Oct-2020 16:16:51 Asia/Singapore] PHP Warning:  file_put_contents(): Only 0 of 86609 bytes written, possibly out of free disk space in /home/ardmorep/public_html/v5/vendor/yiisoft/yii2-debug/LogTarget.php on line 57
+[19-Dec-2020 19:06:31 Asia/Singapore] An Error occurred while handling another error:
+exception 'yii\web\ForbiddenHttpException' with message 'Login Required' in /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/web/User.php:435
+Stack trace:
+#0 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/filters/AccessControl.php(149): yii\web\User->loginRequired()
+#1 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/filters/AccessControl.php(134): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#2 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/ActionFilter.php(73): yii\filters\AccessControl->beforeAction(Object(yii\web\ErrorAction))
+#3 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#4 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Component.php(541): call_user_func(Array, Object(yii\base\ActionEvent))
+#5 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Controller.php(269): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#6 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/web/Controller.php(108): yii\base\Controller->beforeAction(Object(yii\web\ErrorAction))
+#7 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Controller.php(152): yii\web\Controller->beforeAction(Object(yii\web\ErrorAction))
+#8 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('error', Array)
+#9 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/web/ErrorHandler.php(93): yii\base\Module->runAction('admin/default/e...')
+#10 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/ErrorHandler.php(109): yii\web\ErrorHandler->renderException(Object(yii\web\ForbiddenHttpException))
+#11 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\ForbiddenHttpException))
+#12 {main}
+Previous exception:
+exception 'yii\web\ForbiddenHttpException' with message 'Login Required' in /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/web/User.php:435
+Stack trace:
+#0 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/filters/AccessControl.php(149): yii\web\User->loginRequired()
+#1 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/filters/AccessControl.php(134): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#2 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/ActionFilter.php(73): yii\filters\AccessControl->beforeAction(Object(yii\base\InlineAction))
+#3 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#4 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Component.php(541): call_user_func(Array, Object(yii\base\ActionEvent))
+#5 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Controller.php(269): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#6 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/web/Controller.php(108): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#7 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Controller.php(152): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#8 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Module.php(454): yii\base\Controller->runAction('dashboard', Array)
+#9 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/web/Application.php(1) : eval()'d code(84): yii\base\Module->runAction('', Array)
+#10 /home/ardmorep/public_html/v2012/vendor/yiisoft/yii2/base/Application.php(375): yii\web\Application->handleRequest(Object(yii\web\Request))
+#11 /home/ardmorep/public_html/v2012/backend/index.php(29): yii\base\Application->run()
+#12 {main}
+$_SERVER = [
+    'PATH' => '/usr/local/jdk/bin:/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/X11R6/bin:/usr/local/bin:/usr/X11R6/bin:/root/bin:/opt/bin',
+    'TZ' => 'Asia/Singapore',
+    'SCRIPT_NAME' => '/v2012/backend/index.php',
+    'REQUEST_URI' => '/v2012/backend/web/uploads/contacts/fac000.jpgg',
+    'QUERY_STRING' => '',
+    'REQUEST_METHOD' => 'GET',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'REDIRECT_URL' => '/v2012/backend/web/uploads/contacts/fac000.jpgg',
+    'REMOTE_PORT' => '61205',
+    'SCRIPT_FILENAME' => '/home/ardmorep/public_html/v2012/backend/index.php',
+    'SERVER_ADMIN' => 'webmaster@ardmorepark.com.sg',
+    'CONTEXT_DOCUMENT_ROOT' => '/home/ardmorep/public_html',
+    'CONTEXT_PREFIX' => '',
+    'REQUEST_SCHEME' => 'https',
+    'DOCUMENT_ROOT' => '/home/ardmorep/public_html',
+    'REMOTE_ADDR' => '157.49.218.225',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '103.9.100.107',
+    'SERVER_NAME' => 'ardmorepark.com.sg',
+    'SERVER_SOFTWARE' => 'Apache',
+    'SERVER_SIGNATURE' => '',
+    'HTTP_COOKIE' => 'PHPSESSID=3bkobcm3sqiu27u71norqo5732',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.9',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_REFERER' => 'https://ardmorepark.com.sg/v2012/index.php?r=facilities%2Findex',
+    'HTTP_SEC_FETCH_DEST' => 'image',
+    'HTTP_SEC_FETCH_MODE' => 'no-cors',
+    'HTTP_SEC_FETCH_SITE' => 'same-origin',
+    'HTTP_ACCEPT' => 'image/avif,image/webp,image/apng,image/*,*/*;q=0.8',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
+    'HTTP_SEC_CH_UA_MOBILE' => '?0',
+    'HTTP_SEC_CH_UA' => '"Google Chrome";v="87", " Not;A Brand";v="99", "Chromium";v="87"',
+    'HTTP_CONNECTION' => 'close',
+    'HTTP_HOST' => 'ardmorepark.com.sg',
+    'SSL_TLS_SNI' => 'ardmorepark.com.sg',
+    'HTTPS' => 'on',
+    'GEOIP_LONGITUDE' => '77.583298',
+    'GEOIP_LATITUDE' => '12.983300',
+    'GEOIP_AREA_CODE' => '0',
+    'GEOIP_DMA_CODE' => '0',
+    'GEOIP_CITY' => 'Bangalore',
+    'GEOIP_REGION_NAME' => 'Karnataka',
+    'GEOIP_REGION' => '19',
+    'GEOIP_COUNTRY_NAME' => 'India',
+    'GEOIP_COUNTRY_CODE' => 'IN',
+    'GEOIP_CONTINENT_CODE' => 'AS',
+    'GEOIP_ADDR' => '157.49.218.225',
+    'UNIQUE_ID' => 'X93et401SYCr0BeUG5SZvwAAAVM',
+    'REDIRECT_STATUS' => '200',
+    'REDIRECT_SSL_TLS_SNI' => 'ardmorepark.com.sg',
+    'REDIRECT_HTTPS' => 'on',
+    'REDIRECT_GEOIP_LONGITUDE' => '77.583298',
+    'REDIRECT_GEOIP_LATITUDE' => '12.983300',
+    'REDIRECT_GEOIP_AREA_CODE' => '0',
+    'REDIRECT_GEOIP_DMA_CODE' => '0',
+    'REDIRECT_GEOIP_CITY' => 'Bangalore',
+    'REDIRECT_GEOIP_REGION_NAME' => 'Karnataka',
+    'REDIRECT_GEOIP_REGION' => '19',
+    'REDIRECT_GEOIP_COUNTRY_NAME' => 'India',
+    'REDIRECT_GEOIP_COUNTRY_CODE' => 'IN',
+    'REDIRECT_GEOIP_CONTINENT_CODE' => 'AS',
+    'REDIRECT_GEOIP_ADDR' => '157.49.218.225',
+    'REDIRECT_UNIQUE_ID' => 'X93et401SYCr0BeUG5SZvwAAAVM',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/v2012/backend/index.php',
+    'REQUEST_TIME_FLOAT' => 1608375991.1993579864501953125,
+    'REQUEST_TIME' => 1608375991,
+    'argv' => [],
+    'argc' => 0,
+]
+[21-Jan-2021 01:14:30 Asia/Singapore] PHP Fatal error:  Class 'ArrayHelper' not found in /home/ardmorep/public_html/v5/backend/views/useful/index.php on line 35
+[17-Jun-2021 22:40:04 Asia/Singapore] PHP Parse error:  syntax error, unexpected ']' in /home/ardmorep/public_html/v5/vendor/vova07/yii2-start-themes/admin/views/layouts/sidebar-menu-club.php on line 47

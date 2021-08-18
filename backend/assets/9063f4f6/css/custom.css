@@ -1,0 +1,127 @@
+.width-50 {
+    width: 50px;
+}
+
+.ui-datepicker {
+    z-index: 10 !important;
+}
+
+
+/*edit by kani*/
+
+.avslot {
+    background-color: #008000;
+}
+
+.nonpeak {
+    background-color: #cbe9c7 !important;
+    color: #000000;
+}
+
+.clslot {
+    background-color: #f44336 !important;
+    color: #ffffff;
+}
+
+.peak {
+    background-color: #fcddd8 !important;
+    color: #000000;
+}
+
+.sidebar .sidebar-menu .treeview-menu {
+    display: block !important;
+}
+
+.ybslot {
+    background-color: #7EABF5;
+    color: #ffffff;
+}
+
+.boslot {
+    background-color: #CCC !important;
+    color: #000000;
+    cursor: not-allowed;
+}
+
+.naslot {
+    background-color: #CCC !important;
+    color: #000000;
+    cursor: not-allowed;
+}
+
+.brslot {
+    background-color: #dc3333 !important;
+}
+
+.nonpeak {
+    background-color: #cbe9c7 !important;
+}
+
+.peak {
+    background-color: #fcddd8 !important;
+}
+
+.facstac {
+    font-weight: bold;
+    color: #0080C0;
+}
+
+.fc-content .fc-time {
+    display: none;
+}
+
+.fc-content {
+    font-size: 110%;
+    line-height: 19px;
+    text-align: center;
+}
+
+
+/*.fc-body, .fc-agendaWeek-view table {
+	border-collapse:separate !important;
+	border-spacing: auto !important;
+}*/
+
+
+/*
+.fc td, .fc th {
+	border-style:solid;
+	border-width:1px;
+	padding:3px;
+	vertical-align:top
+}*/
+
+.booking-index .navbar-nav>li>a:hover,
+.booking-index .navbar-nav>li>a:active,
+.booking-index .nav .open>a,
+.facility_list .nav .open>a,
+.facility_list .navbar-nav>li>a:hover {
+    background-color: #428bca !important;
+    border-radius: 5px;
+}
+
+
+/*.navbar-nav a .caret{
+	color:#fff;
+}*/
+
+.nav .caret {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+}
+
+.booking-index .dropdown-menu>li>a,
+.facility_list .dropdown-menu>li>a {
+    background-color: #428bca !important;
+    color: #fff;
+}
+
+'
+ .booking-index .dropdown-menu>li,
+.facility_list .dropdown-menu>li {
+    background-color: #428bca !important;
+}
+
+.fa-angle-left {
+	display:none !important;
+}
