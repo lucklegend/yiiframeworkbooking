@@ -48,7 +48,7 @@ class DefaultController extends Controller
         return $this->goHome();
     }
 	
-	    public function actionUpdate($id)
+	public function actionUpdate($id)
     {
         $user = $this->findModel($id);
         $user->setScenario('admin-update');
@@ -80,7 +80,7 @@ class DefaultController extends Controller
             ]);
     }
 	
-	    protected function findModel($id)
+	protected function findModel($id)
     {
         if (is_array($id)) {
             /** @var User $user */

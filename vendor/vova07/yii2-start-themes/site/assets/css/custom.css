@@ -253,8 +253,11 @@ On smaller screens, decrease text size */
     width: 300px;
     margin-bottom: 15px;
 }
+#footerline{
+    border-top: 1px solid rgba(255,255,255,0.21);
+    border-bottom: none;
+}
 .footer-item p{
-    max-width: 300px;
     line-height: 24px;
     padding-bottom: 10px;
     text-align: justify;
@@ -365,6 +368,9 @@ a.fc-event {
 #sidebarBtn .icon-bar{
     background-color: black;
 }
+.onScroll-x{
+    overflow-x: auto;
+}
 /* mobile Responsiveness */
 @media only screen and (min-width: 992px) {
     .nav1 {
@@ -385,6 +391,11 @@ a.fc-event {
     .navbar-toggle{
         z-index: 1000;
     }
+    #w3 .summary{
+        font-size: 18px;
+        padding: 6px;
+    }
+    
 }
 @media only screen and (max-width: 300px) {
     .text {

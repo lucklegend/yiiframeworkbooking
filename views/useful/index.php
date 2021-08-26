@@ -24,7 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		echo '<h3>' . $key . '</h3>';
 		foreach($service as $k => $value){
 			if($k == 0){
-				echo '<table class="table table-striped table-bordered">';
+				echo '<div class="onScroll-x">
+							<table class="table table-striped table-bordered">';
 			}
 			echo '<tr><td width="20">' . ++$i . '</td>
 						<td width="20%">' . $value->name . '</td>
@@ -32,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
 						<td width="35%">' . $value->address . '</td>
 						<td width="10%">' . $value->tel . '</td></tr>';
 			if(($k+1) == count($service)){
-				echo '</table>';
+				echo '</table> </div>';
 			}
 		}
 	}

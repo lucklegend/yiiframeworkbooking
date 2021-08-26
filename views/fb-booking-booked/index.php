@@ -29,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="fb-booking-booked-index">
 <div class="page-title">
   <h2> Bookings </h2>
-  <span class="line-h"></span> </div>
+  <span class="line-h"></span> 
+</div>
 <div id="w0-container" class=" tabs-above tab-align-left tab-bordered tab-height-lg tabs-krajee">
   <ul id="w0" class="nav nav-tabs nav nav-tabs hidden-print" data-krajee-tabsX="tabsX_00000000" role="tablist">
     <li class="active"><a><i class="fa fa-ticket"></i> Current + Future Bookings</a></li>
@@ -40,7 +41,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </br>
             <?php Box::begin(
                 [
-                    
                     'bodyOptions' => [
                         'class' => 'table-responsive'
                     ], 
@@ -60,7 +60,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                     'attribute' => 'facility_id',
                     'value' => 'facility0.name',
-                    'filter' => Html::activeDropDownList($searchModel, 'facility_id', ArrayHelper::map(FbBookingFacility::find()->orderBy(['name' => SORT_ASC])->asArray()->all(), 'id', 'name'),['class'=>'form-control','prompt' => 'Select Facility']),
+                    'filter' => Html::activeDropDownList($searchModel, 
+                            'facility_id', 
+                            ArrayHelper::map(FbBookingFacility::find()
+                                ->orderBy(['name' => SORT_ASC])
+                                ->asArray()
+                                ->all(), 'id', 'name'),
+                            ['class'=>'form-control',
+                                'prompt' => 'Select Facility'
+                            ]),
                     ],
                     // 'slot_from',
                     //'slot_to',
@@ -78,13 +86,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Date & Time',
                     'value' => function($searchModel){
                         if($searchModel->slot_to == '' || $searchModel->slot_to == '0000-00-00 00:00:00'){
-                        return date('d M Y h:ia', strtotime($searchModel->slot_from));
+                            return date('d M Y h:ia', strtotime($searchModel->slot_from));
                         } else {
-                        if(date('d M Y', strtotime($searchModel->slot_from)) == date('d M Y', strtotime($searchModel->slot_to))){
-                        return date('d M Y h:ia', strtotime($searchModel->slot_from)) . " \n - \n " . date('h:ia', strtotime($searchModel->slot_to));
-                        } else{
-                        return date('d M Y h:ia', strtotime($searchModel->slot_from)) . " \nto\n " . date('d M Y h:ia', strtotime($searchModel->slot_to));
-                        }
+                            if(date('d M Y', strtotime($searchModel->slot_from)) == date('d M Y', strtotime($searchModel->slot_to))){
+                                return date('d M Y h:ia', strtotime($searchModel->slot_from)) . " \n - \n " . date('h:ia', strtotime($searchModel->slot_to));
+                            } else{
+                                return date('d M Y h:ia', strtotime($searchModel->slot_from)) . " \nto\n " . date('d M Y h:ia', strtotime($searchModel->slot_to));
+                            }
                         }
                     },
                     //'format' => ['date', 'php:d M Y h:i'],

@@ -29,15 +29,15 @@ class GuestController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['?']
-                    ]
-                ]
-            ]
+            // 'access' => [
+            //     'class' => AccessControl::className(),
+            //     'rules' => [
+            //         [
+            //             'allow' => true,
+            //             'roles' => ['?']
+            //         ]
+            //     ]
+            // ]
         ];
     }
 
@@ -140,13 +140,14 @@ class GuestController extends Controller
      */
     public function actionLogin()
     {
-
         if (!Yii::$app->user->isGuest) {
-            $this->goHome();
+            // $this->goHome();
+            echo '<script>console.log("already logged in!");</script>';
+            return $this->redirect(['/booking/index']); 
         }
-
+        echo '<script>console.log("Not logged in!");</script>';
         $model = new LoginForm();
-		 $errMsg = '';
+		$errMsg = '';
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
 				 if((isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) || Yii::$app->params['enableCaptcha'] != 1){
@@ -175,7 +176,8 @@ class GuestController extends Controller
 							//return $this->redirect(['/pages/index','id'=>1]); 
 							//return $this->redirect(['/fb-booking-booked/index']); 
                             //return $this->redirect(['/facilities/index']); 
-                            return $this->redirect(['/facilities/welcome']); 
+                            // return $this->redirect(['/facilities/welcome']);
+                            return $this->redirect(['/booking/index']); 
 						}
 					} else{
 						$errMsg = 'Robot verification failed, please try again.';

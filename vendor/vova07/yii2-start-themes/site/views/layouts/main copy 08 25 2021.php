@@ -211,11 +211,30 @@ $isHome = (($controller->id === 'facilities') && ($controller->action->id === 'i
       </div>
     </div> -->
     <div class="row">
-      <div class="col-sm-12 footer-item">
-        <hr id="footerline">
+      <div class="col-sm-5 footer-item">
+        <img class="img-responsive" id="footerLogo" src="img/ard-more-park-logo.png" alt="footer logo">
         <p>
-        © Copyright Ardmorepark. Managed by Knight Frank Property Asset Management Pte Ltd | Powered by <a href="https://axon.com.sg/" target="_blank"> Axon Consulting </a>
+        Ardmore Park redefines modern luxury living with a stylish lavishness and exclusive address that is the definitive residence for the well established.
         </p>
+      </div>
+      <div class="col-sm-2 footer-item">
+      <h4 class="text-link">CALL</h4>
+        <ul>
+          <li><a href="tel:+6567330862">Tel: 6733 0862</a></li>
+          <li><a href="tel:+6567330872">Fax: 6733 0872</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-3 footer-item">
+        <h4 class="text-link">WRITE</h4>
+        <ul>
+            <li><a href="mailto:ardmorepark@ardmorepark.com.sg">ardmorepark@ardmorepark.com.sg</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2 footer-item">
+      <h4 class="text-link">VISIT</h4>
+        <ul>
+            <li><span>13 Ardmore Park #01-01 Singapore 259961</span></li>
+        </ul>
       </div>
     </div>
   </div>
