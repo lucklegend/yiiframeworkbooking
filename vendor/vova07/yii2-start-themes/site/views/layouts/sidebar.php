@@ -22,6 +22,7 @@ if(!Yii::$app->user->isGuest){
 			<?php } else{ ?>
 				<?= $this->render('//layouts/sidebar-menu1') ?>
 			<?php } ?>
+			<!--
 				<div style="line-height:22px; text-align:center">
 					<div>Axon Booking Ver 5.0</div>
 					<div>Developed by</div>
@@ -31,6 +32,7 @@ if(!Yii::$app->user->isGuest){
 					<div>Fax: +65 6344 9766</div>
 					<div>e: info@axon.com.sg</div>
 				</div>
+			-->
 		</div>
  </nav> 
 <?php }  ?>

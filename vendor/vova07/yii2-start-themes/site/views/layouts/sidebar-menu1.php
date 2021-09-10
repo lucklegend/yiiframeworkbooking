@@ -27,7 +27,7 @@ echo Menu::widget(
                         'visible' => !Yii::$app->user->isGuest
                     ],
                     [
-                        'label' => Yii::t('vova07/themes/site', 'Bookings'),
+                        'label' => Yii::t('vova07/themes/site', 'My Bookings'),
                         'url' => ['/fb-booking-booked/index'],
                         'visible' => !Yii::$app->user->isGuest
                     ],
@@ -60,28 +60,28 @@ echo Menu::widget(
                 'class' => 'list',
                 'visible' => !Yii::$app->user->isGuest,
                 'items' => [
-                    [
-                        'label' => Yii::t('vova07/themes/site', 'Appication Forms'),
-                        'url' => ['/pages/index', 'id' => 11],
-                        'visible' => !Yii::$app->user->isGuest
-                    ],
+                    // [
+                    //     'label' => Yii::t('vova07/themes/site', 'Appication Forms'),
+                    //     'url' => ['/pages/index', 'id' => 11],
+                    //     'visible' => !Yii::$app->user->isGuest
+                    // ],
                     [
                         'label' => Yii::t('vova07/themes/site', 'News/Circulars'),
                         'url' => ['/pages/index', 'id' => 1],
                         'visible' => !Yii::$app->user->isGuest
                     ],
                     [
-                        'label' => Yii::t('vova07/themes/site', 'Near Ardmore Park'),
+                        'label' => Yii::t('vova07/themes/site', 'Amenities Near Ardmore Park'),
                         'url' => ['/useful/nearme'],
                         'visible' => !Yii::$app->user->isGuest
                     ],
+                    // [
+                    //     'label' => Yii::t('vova07/themes/site', 'Amenities'),
+                    //     'url' => ['/contacts'],
+                    //     'visible' => !Yii::$app->user->isGuest
+                    // ],
                     [
-                        'label' => Yii::t('vova07/themes/site', 'Amenities'),
-                        'url' => ['/contacts'],
-                        'visible' => !Yii::$app->user->isGuest
-                    ],
-                    [
-                        'label' => Yii::t('vova07/themes/site', 'Contractor/Supplier'),
+                        'label' => Yii::t('vova07/themes/site', 'Contractors/Suppliers'),
                         'url' => ['/useful/index'],
                         'visible' => !Yii::$app->user->isGuest
                     ],

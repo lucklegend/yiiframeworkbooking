@@ -58,7 +58,7 @@ $isHome = (($controller->id === 'facilities') && ($controller->action->id === 'i
 <!--/header-->
 
 <?= Alert::widget(); ?>
-<div class="container-in-container" style="background-color:#C8BC9B;">
+<div class="container-in-container" style="background-color:#FDF5E1;"> <!-- //FDF5E1 C8BC9B -->
   <section id="<?= isset($this->params['contentId']) ? $this->params['contentId'] : 'content' ?>" class="container" style="">
   <div class="row clearfix">
     <?php if ($isHome) { ?>
@@ -119,7 +119,7 @@ $isHome = (($controller->id === 'facilities') && ($controller->action->id === 'i
     <?php } ?>
 
   </div>
-  <div class="row" id="content_div" style="background-color:#C8BC9B">
+  <div class="row" id="content_div">
     <div class="col-sm-3 col-md-2" style="text-align:center;">
       <div  id="mobbor">
         <!--<div>

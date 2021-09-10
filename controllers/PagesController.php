@@ -50,7 +50,8 @@ class PagesController extends Controller
        $query = new Query;
 		$query->select(['*'])
 			->from('pages')
-			->where(['category' => $id]);
+			->where(['category' => $id])
+            ->orderBy(['id'=>SORT_DESC]);
 		$command = $query->createCommand();
 		$pages = $command->queryAll(); 
 		

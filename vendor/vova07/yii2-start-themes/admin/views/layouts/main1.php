@@ -25,7 +25,7 @@ use yii\widgets\Breadcrumbs;
 
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="<?= Yii::$app->homeUrl ?>" class="logo">
+            <a href="<?= Yii::$app->homeUrl ?>" class="logo etokaya">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                <img src="../statics/web/logo.jpg" class="img-responsive" height="50">
             </a>

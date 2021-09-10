@@ -3,11 +3,25 @@
 @font-face {
     font-family: 'ItaliannoRegular';
     src: url('../fonts/Italianno-Regular-OTF-webfont.eot');
-    src: url('../fonts/Italianno-Regular-OTF-webfontd41d.eot?#iefix') format('embedded-opentype'), url('../fonts/Italianno-Regular-OTF-webfont.woff') format('woff'), url('../fonts/Italianno-Regular-OTF-webfont.ttf') format('truetype'), url('../fonts/Italianno-Regular-OTF-webfont.svg#ItaliannoRegular') format('svg');
+    src: url('../fonts/Italianno-Regular-OTF-webfontd41d.eot?#iefix') format('embedded-opentype'), 
+    url('../fonts/Italianno-Regular-OTF-webfont.woff') format('woff'), 
+    url('../fonts/Italianno-Regular-OTF-webfont.ttf') format('truetype'), 
+    url('../fonts/Italianno-Regular-OTF-webfont.svg#ItaliannoRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'MillGoudy';
+    src: url('../fonts/SortsMillGoudy-Regular.eot');
+    src: url('../fonts/SortsMillGoudy-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/SortsMillGoudy-Regular.woff2') format('woff2'),
+        url('../fonts/SortsMillGoudy-Regular.woff') format('woff'),
+        url('../fonts/SortsMillGoudy-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 .width-50 {
     width: 50px;
 }
@@ -181,7 +195,7 @@ On smaller screens, decrease text size */
 
 .nav1 {
     margin-bottom: 20px;
-    background-color: #fdf5e1;
+    /* background-color: #fdf5e1; */
     border-radius: 10px;
 }
 
@@ -197,7 +211,6 @@ On smaller screens, decrease text size */
 
 .h3 {
     color: #8c6238;
-    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -334,12 +347,14 @@ h5,
 h6 {
     margin-bottom: 20px;
     font-weight: normal;
-    font-family: 'Italianno' !important;
+    font-family: 'MillGoudy';
     /* font-family: 'ItaliannoRegular', Arial, sans-serif, Helvetica; */
     color: #ac7339;
     /* font-style: oblique; */
 }
-
+p, a, th, td, div{
+    font-family: 'MillGoudy';
+}
 .navbar-collapse {
 	padding-right: 10px;
 	padding-left: 10px;
@@ -370,6 +385,9 @@ a.fc-event {
 }
 .onScroll-x{
     overflow-x: auto;
+}
+.sidebar-menu li.treeview a{
+    font-size:16px;
 }
 /* mobile Responsiveness */
 @media only screen and (min-width: 992px) {

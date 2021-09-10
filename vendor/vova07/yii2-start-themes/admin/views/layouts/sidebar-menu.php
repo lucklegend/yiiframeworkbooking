@@ -30,7 +30,7 @@ echo Menu::widget(
                 'items' => [
 				    
 				     [
-                        'label' => Yii::t('vova07/themes/admin', 'Online Booking'),
+                        'label' => Yii::t('vova07/themes/admin', 'Place Booking'),
                         'url' => ['/fb-booking-booked/index'],
                         'visible' => Yii::$app->user->can('administrateRbac') ||  Yii::$app->user->identity->role == 'superadmin' || Yii::$app->user->can('BViewRoles')  ||  Yii::$app->user->identity->role == 'admin'  
                     ],

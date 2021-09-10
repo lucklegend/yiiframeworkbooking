@@ -19,6 +19,7 @@ use yii\widgets\Breadcrumbs;
     <script src='https://www.google.com/recaptcha/api.js'></script>
         <?= $this->render('//layouts/head') ?>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="https://ardmorepark.com.sg/v5/img/favicon.ico" type="image/x-icon">
     </head>
     <body class="skin-blue">
     <?php $this->beginBody(); ?>
@@ -27,7 +28,7 @@ use yii\widgets\Breadcrumbs;
         <header class="header" style="background-image: url(img/top_bg1.gif);">
             <a href="<?= Yii::$app->homeUrl ?>" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-               <img src="img/sub_logo.gif" class="img-responsive" height="50">
+               <img src="img/ard-more-park-logo.png" class="img-responsive" style="margin-top: 10px;">
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">

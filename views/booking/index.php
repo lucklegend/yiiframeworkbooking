@@ -17,12 +17,11 @@ $this->title = 'Booking';
 ?> 
 		<div class="navbar-collapse in nav1">
       		
-
 			<div class="page-title" style="margin: 10px 0px;">
-				<img height="36" src="img/t/online.gif" width="263">
-									<span class="line-h"></span>
-				<p>Booking For less than 3 days is not allowed for the facilities BBQ Pit, Entertainment Room ,North Function Room, South Function Room </p>
-				<h4>Please select the facilities for book.</h4>
+				<h1>Online Facility Booking</h1>
+				<span class="line-h"></span>
+				<!--<p>Booking For less than 3 days is not allowed for the facilities BBQ Pit, Entertainment Room ,North Function Room, South Function Room </p>-->
+				<h4>Please select the facilities to book.</h4>
 			</div>
 			<div class="container" id="facilityMenu">
 				<ul class="nav navbar-nav">
@@ -96,7 +95,7 @@ $this->title = 'Booking';
 			Modal::end();
 		}
 		if(empty(Yii::$app->request->get('facid'))){
-			echo "<h4>Please select the facilities for book.</h4>";
+			// echo "<h4>Please select the facilities for book.</h4>";
 		
 		}
 	?>
@@ -267,8 +266,7 @@ $this->title = 'Booking';
   border: 0;
   width: 200px;
   text-align: left;
-	display: block;		
-	font-family: 'Montserrat', sans-serif;		
+	display: block;			
 	border-radius: 0px 3px 3px 0px;
 }
 
@@ -278,7 +276,7 @@ $this->title = 'Booking';
   cursor: default;
   font-size: 12px;		
 	font-weight:bold;		
-	font-family: 'Montserrat', sans-serif;		
+		
 	border-radius: 3px 0px 0px 3px;	
 }
 
