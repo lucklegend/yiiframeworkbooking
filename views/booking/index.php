@@ -164,15 +164,19 @@ $this->title = 'Booking';
 			],
 		]);
 	}
- 		
+ 		$greenbooking = array(14,18,28,29,24,26);
 	if($facID != ''){ ?>
       <div class="BOX_LEGEND"  ><br/>
             <h3 class="h3">Legends</h3>
 				<br/>
+						<?php 
+						if(in_array($facID,$greenbooking)){
+						?>
 						<div class="BOX_IN_LEGEND">
 							<div class="BOX_AV LEGEND" style="background-color: #008000; color: white">  AV </div>
 							<div class="BOX_LABEL"> Available for Booking </div>
 						</div>
+						<?php }?>
 						<div class="BOX_IN_LEGEND">
 							<div class="BOX_BO LEGEND" style="background-color: #ddd; color: black">  BO </div>
 							<div class="BOX_LABEL"> Booked by Others </div>
@@ -193,7 +197,9 @@ $this->title = 'Booking';
 							<div class="BOX_LE LEGEND" style="background-color: #DF7575; color: #FFFFFF">  LE </div>
 							<div class="BOX_LABEL"> Limit Exceeded  </div>
 						</div>
-
+						<?php 
+						if($facID == 38 || $facID == 27){
+						?>
 					 	<div class="BOX_IN_LEGEND">
 							<div class="BOX_PH LEGEND" style="background-color: #cbe9c7; color: black">  AV </div>
 							<div class="BOX_LABEL"> Non Peak Hours  </div>
@@ -202,6 +208,7 @@ $this->title = 'Booking';
 							<div class="BOX_LM LEGEND" style="background-color: #fcddd8; color: black">  AV </div>
 							<div class="BOX_LABEL"> Peak Hours  </div>
 						</div>
+						<?php } ?>
 						<div class="BOX_IN_LEGEND">
 							<div class="BOX_LB LEGEND" style="background-color: #dc3333; color: #FFFFFF">  BR </div>
 							<div class="BOX_LABEL"> User Barred  </div>

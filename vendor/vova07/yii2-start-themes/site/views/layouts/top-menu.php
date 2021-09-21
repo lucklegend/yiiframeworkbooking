@@ -45,12 +45,12 @@ echo Menu::widget(
                 'url' => 'https://ardmorepark.com.sg/site/virtual-tour/',
                 'visible' => Yii::$app->user->isGuest || !Yii::$app->user->isGuest,
             ],
-            [
-                'label' => Yii::t('vova07/themes/site', 'USEFUL LINK'),
-                // 'url' => ['/fb-booking-group/site'], 
-                'url' => 'https://ardmorepark.com.sg/site/useful-links/',
-                'visible' => Yii::$app->user->isGuest || !Yii::$app->user->isGuest,
-            ],
+            // [
+            //     'label' => Yii::t('vova07/themes/site', 'USEFUL LINK'),
+            //     // 'url' => ['/fb-booking-group/site'], 
+            //     'url' => 'https://ardmorepark.com.sg/site/useful-links/',
+            //     'visible' => Yii::$app->user->isGuest || !Yii::$app->user->isGuest,
+            // ],
             [
                 'label' => Yii::t('vova07/themes/site', 'GALLERY'),
                 // 'url' => ['/fb-booking-group/site'], 
@@ -158,11 +158,11 @@ echo Menu::widget(
                 'url' => ['/blogs/default/index'],
 				'visible' => !Yii::$app->user->isGuest,
             ],*/
-            [
-                'label' => Yii::t('vova07/themes/site', 'SITE MAP'),
-                'url' => ['/fb-booking-group/map1'],
-                'visible' => Yii::$app->user->isGuest || !Yii::$app->user->isGuest,
-            ],
+            // [
+            //     'label' => Yii::t('vova07/themes/site', 'SITE MAP'),
+            //     'url' => ['/fb-booking-group/map1'],
+            //     'visible' => Yii::$app->user->isGuest || !Yii::$app->user->isGuest,
+            // ],
 
             [
                 'label' => Yii::t('vova07/themes/site', 'CONTACT US'),
