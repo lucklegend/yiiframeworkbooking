@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </style>
 <div class="fb-booking-booked-index">
 <div class="page-title">
-  <h2> Bookings </h2>
+  <h1> My Bookings </h1>
   <span class="line-h"></span> 
 </div>
 <div id="w0-container" class=" tabs-above tab-align-left tab-bordered tab-height-lg tabs-krajee">

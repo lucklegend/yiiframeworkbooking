@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="page-title">
-  <h1 style="color:#ac7339;">Social Events</h1>
+  <h1 style="color:#ac7339;">Events</h1>
   <span class="line-h"></span> 
   <p><a style="color:#ac7339; font-weight:bold; background:none" href="index.php?r=events/index">Click here</a> to event list view</p>
   </div>

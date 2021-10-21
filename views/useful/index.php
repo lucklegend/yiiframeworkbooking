@@ -11,7 +11,7 @@ use common\models\UsefulType;
 /* @var $searchModel common\models\UsefulSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Contractors Info';
+$this->title = 'Contractors/Suppliers';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="useful-index">

@@ -247,13 +247,19 @@ class FbBookingBookedController extends Controller
 	public function actionCancelupdate($id)
     {
         $model = $this->findModel($id);
-  	
-        $model->cancelled_time = date('Y-m-d h:i:s');
-        $model->cancelled_by = Yii::$app->user->getId();
-        $model->status = 3;
-        $model->cancelled_reason = '';
-        $model->save();
-        return $this->redirect(['view', 'id' => $model->id]);
+  		$post = Yii::$app->request->post();
+        if ($model->load(Yii::$app->request->post())) {
+			$model->cancelled_time = date('Y-m-d h:i:s');
+			$model->cancelled_by = Yii::$app->user->getId();
+			$model->status = 3;
+			$model->cancelled_reason = $post['FbBookingBooked']['cancelled_reason'];
+			$model->save();
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('cancelupdate', [
+                'model' => $model,
+            ]);
+        }
     }
 	
 		public function actionConfirmbooking($id, $pid)

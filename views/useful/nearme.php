@@ -5,7 +5,7 @@ use yii\grid\ActionColumn;
 use yii\helpers\ArrayHelper;
 use kartik\tabs\TabsX;
 
-$this->title = 'Near Me';
+$this->title = 'Amenities Near Ardmore Park';
 $this->params['subtitle'] = 'Near Me';
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -21,69 +21,68 @@ $content7 = '<iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d1
 ?>
 
 <style>
-.h3.visible-print-block{
-	display: none !important;
-}
+    .h3.visible-print-block {
+        display: none !important;
+    }
 </style>
 <div class="fb-booking-booked-index">
- 
-		    <div class="page-title">
-                <h2> Near Me </h2>
-                <span class="line-h"></span> 
-            </div>
-            
-            <?php
-            $items = [
-                [
-                    'label'=>'Embassies',                     
-                    'content' => $content1,
-                    'active'=>true,
-                ],
-                [
-                    'label'=>'Hospitals',                     
-                    'content' => $content2,
-                ],
-                [
-                    'label'=>'Hotels',                     
-                    'content' => $content3,
-                ],
-                [
-                    'label'=>'Police Station',                     
-                    'content' => $content4,
-                ],
-                [
-                    'label'=>'Post Office',                     
-                    'content' => $content5,
-                ],
-                [
-                    'label'=>'Salvation Army Donation Booth',                     
-                    'content' => $content5_1,
-                ],
-                [
-                    'label'=>'Schools',                     
-                    'content' => $content6,
-                ],
-                
-                [
-                    'label'=>'Shopping',                     
-                    'content' => $content7,
-                ],
-                
-            ]; 
 
-            echo TabsX::widget([
-                'items'=>$items,
-                'position'=>TabsX::POS_ABOVE, 
-                'height'=>TabsX::SIZE_LARGE,
-                'bordered'=>true,
-                'encodeLabels'=>false
-            ]);
+    <div class="page-title">
+        <h1>Amenities Near Ardmore Park</h1>
+        <span class="line-h"></span>
+    </div>
 
-            $this->registerJs('
+    <?php
+    $items = [
+        [
+            'label' => 'Embassies',
+            'content' => $content1,
+            'active' => true,
+        ],
+        [
+            'label' => 'Hospitals',
+            'content' => $content2,
+        ],
+        [
+            'label' => 'Hotels',
+            'content' => $content3,
+        ],
+        [
+            'label' => 'Police Station',
+            'content' => $content4,
+        ],
+        [
+            'label' => 'Post Office',
+            'content' => $content5,
+        ],
+        [
+            'label' => 'Salvation Army Donation Booth',
+            'content' => $content5_1,
+        ],
+        [
+            'label' => 'Schools',
+            'content' => $content6,
+        ],
+
+        [
+            'label' => 'Shopping',
+            'content' => $content7,
+        ],
+
+    ];
+
+    echo TabsX::widget([
+        'items' => $items,
+        'position' => TabsX::POS_ABOVE,
+        'height' => TabsX::SIZE_LARGE,
+        'bordered' => true,
+        'encodeLabels' => false
+    ]);
+
+    $this->registerJs('
             $("document").ready(function() {
             setTimeout(function() {
             $(".tabs-krajee").find("li.active a").click();
             },10);
             });', \yii\web\View::POS_READY);
-            ?> 
-       
+    ?>
