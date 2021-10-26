@@ -16,7 +16,6 @@ use yii\web\JsExpression;
 $this->title = 'Booking';
 ?> 
 		<div class="navbar-collapse in nav1">
-      		
 			<div class="page-title" style="margin: 10px 0px;">
 				<h1>Online Facility Booking</h1>
 				<span class="line-h"></span>
