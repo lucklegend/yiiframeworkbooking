@@ -809,17 +809,17 @@ class BookingRules extends \yii\db\ActiveRecord
 		return $result;
 	}
 	
-    function timeToFloat($time, $intervel=0) {
+  function timeToFloat($time, $intervel=0) {
 		$ta = split(':',$time);
 		return $ta[0] * 60 + $ta[1] + $intervel;
 	}
 
-    function time2To3($time) {
+  function time2To3($time) {
 		$ta = split(':',$time);
 		return sprintf('%02d', $ta[0]) . ':' . sprintf('%02d', $ta[1]) . ':00';
 	}
 	
-    function floatToTime($time) {
+  function floatToTime($time) {
 		$hrs = floor($time/60);
 		$min = $time%60;
 		//return $hrs . ':' . sprintf("%02d",$min) . ':00';

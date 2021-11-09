@@ -120,13 +120,6 @@ $this->title = 'Booking';
 	
 	if($facID != '') {
 		$facID = $facID ? $facID : 1; 
-  
- 
-		foreach ($calendar['events'] as $eve){
-			if($eve['title'] == 'MT') {
-				$eve['description'].'<br/>';
-			}
-		}
 
 		echo yii2fullcalendar\yii2fullcalendar::widget([ 
 			'options' => [
@@ -142,7 +135,7 @@ $this->title = 'Booking';
 								placement: \'top\',
 								container: \'body\'
 								}); 
-							}',
+							}', /* the use of this is when you hover the button a pop up will show. */
 				
 			'clientOptions' => [
 				'minTime' => $calendar['timeStart'],
@@ -163,6 +156,7 @@ $this->title = 'Booking';
 			],
 		]);
 	}
+		
  		$greenbooking = array(14,18,28,29,24,26);
 	if($facID != ''){ ?>
       <div class="BOX_LEGEND"  ><br/>
