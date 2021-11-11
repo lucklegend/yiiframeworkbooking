@@ -98,41 +98,6 @@ class BookingController extends \yii\web\Controller
 					$Event = new \yii2fullcalendar\models\Event();
 					$tid =  strtotime($slotdate . ' ' . $slottime);
 
-					/*	if($slotDetails->alreadyReserved == 1) {
-					 
-					  $Event->title = 'BO';
-					  $Event->className  = 'boslot';
-
-					} elseif($slotDetails->closed == 1) {				
-						
-						$Event->title = 'MT';			
-						$Event->className  = 'mtslot'; 		
-						$Event->description  = $cls[0]['title']; 
-						 				
-					} elseif($slotDetails->alreadyReservedUser == 1) {
-					   $Event->title = 'YB';
-					   $Event->className  = 'ybslot';
-
-					} elseif( $count1 > 0 && $slotDetails->canReserve == 1  ) {
-					
-						$Event->title = 'AV';
-					   $Event->className  = ' avslot';
-					
-					}elseif($count >= 2 ){
-					  $Event->title = 'LE';
-					  $Event->className  = ' leslot';
-					}elseif($slotDetails->canReserve == 1 ) {
-					  $Event->title = 'AV';
-					  $Event->className  = ' avslot';
-					} elseif($box->reserveLimit == 0 ){
-					  $Event->title = 'LE';
-					  $Event->className  = ' leslot';
-					}   else {
-					  $Event->title = 'CL';
-					  $Event->className  = ' naslot';
-					}
-					*/
-
 					if ($slotDetails->alreadyReservedUser > 0 && $slotDetails->alreadyReservedUser != 0) {
 						$Event->title = 'YB';
 						$Event->description = 'Your Current Booking';
@@ -204,8 +169,9 @@ class BookingController extends \yii\web\Controller
 			}
 		}
 		$calendar['events'] = $events;
+		// print_r($events);
+		// exit();
 		return $calendar;
-		//return $events;
 	}
 
 	public function actionJsoncalendar($start = NULL, $end = NULL, $_ = NULL)
@@ -270,7 +236,8 @@ class BookingController extends \yii\web\Controller
 				}
 			}
 		}
-
+		// var_dump($events);
+		// exit();
 		return $events;
 	}
 

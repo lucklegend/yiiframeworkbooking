@@ -97,11 +97,11 @@ class BookingRules extends \yii\db\ActiveRecord
     }
 	
 	function countBooked($facilityID = 0, $user = NULL, $date = ''){
-		$facility 	= $this->facility($facilityID);
+		$facility 	= $this->facility($facilityID); // get the FbBookingFacility datas
 		$count 		= array();
 		$connection = \Yii::$app->db;
-		$weekdays 	= $this->weekStartEnd($date);
-		$monthdays	= $this->monthStartEnd($date);
+		$weekdays 	= $this->weekStartEnd($date); // get the todays start week and end week (Sunday - Saturday)
+		$monthdays	= $this->monthStartEnd($date); // get the calendar days from 1 to the end (28, 29, 30, 31) 
 
 		$where 		 = " `user_id` = '" . $user . "'";
 		
@@ -145,13 +145,10 @@ class BookingRules extends \yii\db\ActiveRecord
 		
 	}
 	
-	
 	function ckeckRules($facilityID, $user=NULL, $date){
-		
 		$facility = $this->facility($facilityID);
-		 
-        $modelRules 	= new FbBookingRules();
-        $modelFacility 	= new FbBookingFacility();
+    $modelRules 	= new FbBookingRules();
+    $modelFacility 	= new FbBookingFacility();
 		$blocklimit = array('nonpeak' => 0, 'peak' => 0, 'allday' => 0, 0 => 0, 1 => 0, 2 => 0);
 		
 		$allRules = $this->allRules($facilityID);
@@ -196,8 +193,6 @@ class BookingRules extends \yii\db\ActiveRecord
 	}
 	
 	function chkRoom($fac, $date = '' , $stime , $etime){
-	 
-	 
 		$st = date("H:i:s", strtotime($stime));
 		$et = date("H:i:s", strtotime($etime));
 
@@ -207,10 +202,8 @@ class BookingRules extends \yii\db\ActiveRecord
 
 			$fty = '24 , 26';
 			$tme = " AND CAST(time(`slot_from`) as time) >= '".  $st ."' AND CAST(time(`slot_to`) as time) <= '". $et ."' ";
-			 
+		
 		} elseif( $fac == '24' || $fac == '26') {
-
-
 			if($st == '15:00:00' && $et == '16:00:00'){
 				$st = '14:00:00';
 				$et = '15:00:00';
@@ -223,56 +216,39 @@ class BookingRules extends \yii\db\ActiveRecord
 			$fty = '1';
 			$tme = '' ;
 		}
- 
 		
 		$usr = Yii::$app->user->identity->id;
 		$connection = \Yii::$app->db; 
 		$status = ' AND status IN ("1" , "2") ';
-
 		//$sql = 'SELECT COUNT(*) FROM `fb_booking_booked` WHERE `user_id` =  '. $usr .' AND  `facility_id` IN ( '.$fty.' )  ' . $dtime . $tme . $status ; 
 		
 		$sql = 'SELECT COUNT(*) FROM `fb_booking_booked` WHERE    `facility_id` IN ( '.$fty.' )  ' . $dtime . $tme . $status ; 
-	 
-		
-		 
 
 		$model = $connection->createCommand($sql); 
 		$count = $model->queryScalar();  
 		
 		return $count;
- 
 	}
 
 	
 	function getBarr($fac, $user , $date){
-	 
-	  
-	  
 		$facility 		= $this->facility($fac); 
 		$connection = \Yii::$app->db; 
 
-		  $sql = "SELECT `expiry` FROM `fb_barring` WHERE `group_id` =  '". $facility->group ."'  AND  `user_id` =  '". $user ."'    " ; 
-		 
+		$sql = "SELECT `expiry` FROM `fb_barring` WHERE `group_id` =  '". $facility->group ."'  AND  `user_id` =  '". $user ."'    " ; 
+		
 		$model = $connection->createCommand($sql); 
 		$count = $model->queryScalar();  
-		 
+		
 		return $count;
- 
 	}
 
 	function alreadyBookedUsd($fac, $date = '' , $user  , $stime , $etime ){
 	 
-	 
-		 
-		 
 		$st = date("H:i:s", strtotime($stime));
 		$et = date("H:i:s", strtotime($etime));
 
 		$dtime = " AND `user_id` = '".  $user ."' AND date(`slot_from`) = '". $date ."'  AND CAST(time(`slot_from`) as time) = '".  $st ."' AND CAST(time(`slot_to`) as time) = '". $et ."' ";
-		 
- 
-		
-		 
 		$connection = \Yii::$app->db; 
 		$status = ' AND status IN ("1" , "2") ';
 
@@ -286,31 +262,27 @@ class BookingRules extends \yii\db\ActiveRecord
  
 	}
 
-
-
-	
     function getCalendar($facilityID, $user = 0, $dateStart = '', $dateEnd = '', $isAdmin = false){
 		//exit;
 		//$time_start = microtime(true);  //for time debug
 		
-		$facility 		= $this->facility($facilityID);
-		$slotTimes 		= $this->slotTimes($facilityID);
-		$bookday_start 	= $facility->bookday_start;
-		$bookday_end 	= $facility->bookday_end;
+		$facility 		= $this->facility($facilityID); // get the FbBookingFacility records
+		$slotTimes 		= $this->slotTimes($facilityID); // get the Start and end Date Time
+		$bookday_start 	= $facility->bookday_start; // get on database bookday_start
+		$bookday_end 	= $facility->bookday_end; // get on database bookday_end
 		
 //		print_r($slotTimes);
 //		exit;
 		
-		$facDayStart 	= date('Y-m-d', strtotime("+$bookday_start days", strtotime(date('Y-m-d'))));
-		$facDayEnd 		= date('Y-m-d', strtotime("+$bookday_end days", strtotime(date('Y-m-d'))));
-		if($dateStart == '' || $dateStart == '0000-00-00' || $dateStart < $facDayStart) $dateStart = $facDayStart;
+		$facDayStart 	= date('Y-m-d', strtotime("+$bookday_start days", strtotime(date('Y-m-d')))); // add number of days in database to present dates
+		if ($dateStart == '' || $dateStart == '0000-00-00' || $dateStart < $facDayStart) $dateStart = $facDayStart;
+		$facDayEnd 		= date('Y-m-d', strtotime("+$bookday_end days", strtotime(date('Y-m-d')))); // add number of days in the database (2,3,30,60) to the present dates
 		if($dateEnd == '' || $dateEnd == '0000-00-00' || $dateEnd > $facDayEnd) $dateEnd = $facDayEnd;
 		
 		$boxes = array();
 		for($date = $dateStart;$date <= $dateEnd; $date = date('Y-m-d', strtotime('+1 days', strtotime($date)))){
 			//echo $date;
-			$closed 		= $this->closingFac($facilityID, $date); 
-		
+			$closed 		= $this->closingFac($facilityID, $date); // get data in fbBookingClosingday records.
 			$countBooked 	= $this->countBooked($facilityID, $user, $date);
 			$ckeckRules 	= $this->ckeckRules($facilityID, $user, $date);
 			
@@ -340,8 +312,6 @@ class BookingRules extends \yii\db\ActiveRecord
 				$box->chkRoom 				= $room;
 				$box->barr	 				= $barr;
 				$box->reserveLimit 	= 1;
-
-
 				
 				if( $box->alreadyReserved){
 					$box->canReserve 	= 0;
@@ -358,9 +328,6 @@ class BookingRules extends \yii\db\ActiveRecord
 					$box->canReserve 	= 1;
 					
 				} 
-
-
-
 				
 			/*	if( $box->alreadyReserved){
 					$box->canReserve 	= 0;
@@ -580,11 +547,11 @@ class BookingRules extends \yii\db\ActiveRecord
 	}
 	
 	function slotTimes($facilityID){
-		$facility = $this->facility($facilityID);
-		$allSlots = $this->allSlots($facilityID);	
+		$facility = $this->facility($facilityID); // get the FbBookingFacility datas
+		$allSlots = $this->allSlots($facilityID);	// get the FbBookingSlot
 		//print_r($facility);
 		//print_r($allSlots);
-		 //exit;
+		//exit;
 		$i = 0;
 		$slotDec = array();
 		foreach($allSlots as $slot){
@@ -610,7 +577,7 @@ class BookingRules extends \yii\db\ActiveRecord
 	
 	function allSlots($facilityID){
 		
-		$facility = $this->facility($facilityID);
+		$facility = $this->facility($facilityID); //get the FbBookingFacility datas
 		
 		$where = array();
 		if($facility->slottype == 1){
@@ -736,12 +703,13 @@ class BookingRules extends \yii\db\ActiveRecord
 	function closingFac($facilityID = 0, $date = ''){
 		$close 		= array();
 		$close['closeday'] = 0;
+
 		$connection = \Yii::$app->db;
 		$sql = "SELECT * FROM `fb_booking_closingday` WHERE '$date' between `date_from` AND `date_to` and `facility` = '$facilityID'";
-	
 		$model = $connection->createCommand($sql);
-		$closing = $model->queryOne();
-		$cday_count = $model->queryScalar();
+
+		$closing = $model->queryOne(); // get the first row
+		$cday_count = $model->queryScalar(); //get the first row and first column for this it was ID
 
 		if($cday_count > 0){
 			$close['closeday'] = 1;
@@ -804,8 +772,8 @@ class BookingRules extends \yii\db\ActiveRecord
 	}
 	
 	function monthStartEnd($date){
-		$result['start'] = date('Y-m-01', strtotime($date));
-		$result['end'] = date('Y-m-t', strtotime($date));
+		$result['start'] = date('Y-m-01', strtotime($date)); //show the current first date. 
+		$result['end'] = date('Y-m-t', strtotime($date)); // show current date (2021-11-30) t = 28, 29, 30, 31 based on the month
 		return $result;
 	}
 	
