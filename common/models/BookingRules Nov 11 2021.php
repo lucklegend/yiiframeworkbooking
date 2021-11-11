@@ -230,7 +230,7 @@ class BookingRules extends \yii\db\ActiveRecord
 
 	
 	function getBarr($fac, $user , $date){
-		$facility = $this->facility($fac); 
+		$facility 		= $this->facility($fac); 
 		$connection = \Yii::$app->db; 
 
 		$sql = "SELECT `expiry` FROM `fb_barring` WHERE `group_id` =  '". $facility->group ."'  AND  `user_id` =  '". $user ."'    " ; 
@@ -242,6 +242,7 @@ class BookingRules extends \yii\db\ActiveRecord
 	}
 
 	function alreadyBookedUsd($fac, $date = '' , $user  , $stime , $etime ){
+	 
 		$st = date("H:i:s", strtotime($stime));
 		$et = date("H:i:s", strtotime($etime));
 
@@ -249,7 +250,9 @@ class BookingRules extends \yii\db\ActiveRecord
 		$connection = \Yii::$app->db; 
 		$status = ' AND status IN ("1" , "2") ';
 
-		$sql = 'SELECT COUNT(*) FROM `fb_booking_booked` WHERE `facility_id` IN ( '.$fac.' )  ' . $dtime .  $status ; 	  
+		$sql = 'SELECT COUNT(*) FROM `fb_booking_booked` WHERE `facility_id` IN ( '.$fac.' )  ' . $dtime .  $status ; 
+	  
+
 		$model = $connection->createCommand($sql); 
 		$count = $model->queryScalar();  
 		
@@ -284,11 +287,11 @@ class BookingRules extends \yii\db\ActiveRecord
 			foreach($slotTimes as $skey => $slot){
 				$slotTime 	= $date . ' ' . $this->floatToTime($slot['start']);
 				$room	 	= $this->chkRoom($facilityID, $date , $this->floatToTime($slot['start']) , $this->floatToTime($slot['end']) );  // get the fb_booking_booked data using start time and end time.
-				$booked 	= $this->alreadyBooked($facilityID, $slotTime); // show BO when you book function halls.
-				$bkduser 	= $this->alreadyBookedUsd($facilityID, $date, $user , $this->floatToTime($slot['start']) , $this->floatToTime($slot['end'])); // get the fb_booking_booked more on time and but also the date.
-				$getPeak 	= $this->getPeak($facilityID, $date, $this->floatToTime($slot['start'])); // count all fb_booking_slot from facility where peak = 1
-				$getNonPeak = $this->getNonPeak($facilityID, $date, $this->floatToTime($slot['start'])); // count all fb_booking_slot from facility where peak = 0
-				$barr		= $this->getBarr($facilityID, $user ,$date); // get data from fb_barring via group_id in facility table and user no data
+				$booked 	= $this->alreadyBooked($facilityID, $slotTime);
+				$bkduser 	= $this->alreadyBookedUsd($facilityID, $date, $user , $this->floatToTime($slot['start']) , $this->floatToTime($slot['end']));
+				$getPeak 	= $this->getPeak($facilityID, $date, $this->floatToTime($slot['start']));
+				$getNonPeak = $this->getNonPeak($facilityID, $date, $this->floatToTime($slot['start']));
+				$barr		= $this->getBarr($facilityID, $user ,$date);
 				//print_r($getPeak);
 				//print_r($slot);
 				 
@@ -308,7 +311,7 @@ class BookingRules extends \yii\db\ActiveRecord
 				$box->barr	 				= $barr;
 				$box->reserveLimit 	= 1;
 				
-				if($box->alreadyReserved){
+				if( $box->alreadyReserved){
 					$box->canReserve 	= 0;
 				} elseif($box->blockpeak == 1 && $box->peak == 1  ){
 					$box->reserveLimit 	= 0;
@@ -321,9 +324,49 @@ class BookingRules extends \yii\db\ActiveRecord
 					$box->canReserve 	= 0;
 				}   else {
 					$box->canReserve 	= 1;
+					
 				} 
+				
+			/*	if( $box->alreadyReserved){
+					$box->canReserve 	= 0;
+				} elseif($box->blockpeak   ){
+					$box->reserveLimit 	= 0;
+					$box->canReserve 	= 0;
+				} elseif($box->blocknonpeak  ){
+					$box->reserveLimit 	= 0;
+					$box->canReserve 	= 0;
+				} elseif($box->blockallday == 1){
+					$box->reserveLimit 	= 0;
+					$box->canReserve 	= 0;
+				} else {
+					$box->canReserve 	= 1;
+					
+				} 
+
+
+			if($box->alreadyReserved){
+					$box->canReserve 	= 0; 
+				} elseif(Yii::$app->user->identity->role == 'superadmin') {
+				 $box->canReserve 	= 1;	
+				}elseif($box->blockpeak && $box->peak == 1){
+					$box->reserveLimit 	= 0;
+				} elseif($box->blocknonpeak && $box->peak == 1){
+					$box->reserveLimit 	= 0;
+				} elseif($box->blockallday == 1){
+					$box->reserveLimit 	= 0;
+				} else {
+					$box->canReserve 	= 1;
+				}*/
+//				$box->boxClass
+//				$box->boxText
+//				$box->boxTips
 				$boxes[$date][$this->floatToTime($slot['start'])] = $box;
 			}
+//			echo $date .'<br>';
+//			$i++;
+//			if($i > 10) break;
+			//echo '<br>Total execution time in seconds: ' . (microtime(true) - $time_start);
+
 		}
 		$totalSlot			= count($slotTimes) - 1;
 		$boxes['unitTime']  = $facility->unit_time;
@@ -384,9 +427,9 @@ class BookingRules extends \yii\db\ActiveRecord
 	
 	function getPeak123($facilityID, $date, $slotTime){
 		$connection = \Yii::$app->db;
-		$facility = $this->facility($facilityID); // get the FbBookingFacility datas 
+		$facility = $this->facility($facilityID);
 		
-		if($facility->slottype == 1){ // all in record are 1
+		if($facility->slottype == 1){
 			$where = "and `facility` = '" . $facilityID . "'";
 		} else {
 			$where = "and `group` = '" . $facility->group . "'";
@@ -401,9 +444,9 @@ class BookingRules extends \yii\db\ActiveRecord
 
 	function getPeak($facilityID, $date, $slotTime){
 		$connection = \Yii::$app->db;
-		$facility = $this->facility($facilityID); // get the FbBookingFacility datas 
+		$facility = $this->facility($facilityID);
 		
-		if($facility->slottype == 1){ // all in record are 1
+		if($facility->slottype == 1){
 			$where = "and `facility` = '" . $facilityID . "' and peak = '1' ";
 		} else {
 			$where = "and `group` = '" . $facility->group . "'  and peak = '1' ";
@@ -413,7 +456,7 @@ class BookingRules extends \yii\db\ActiveRecord
 		$where .= ' and `' . strtolower($dText) . '` = "1"';
 		$sql = "SELECT COUNT(*) FROM `fb_booking_slot` WHERE '$slotTime' >= `time_from` AND '$slotTime' < `time_to` " . $where;
 		$model = $connection->createCommand($sql); 
-
+	 	 
 		$count = $model->queryScalar();  
 		
 		return $count; 
@@ -432,7 +475,8 @@ class BookingRules extends \yii\db\ActiveRecord
 		$dText = date('l', strtotime($date));
 		$where .= ' and `' . strtolower($dText) . '` = "1"';
 		$sql = "SELECT COUNT(*) FROM `fb_booking_slot` WHERE '$slotTime' >= `time_from` AND '$slotTime' < `time_to` " . $where;
-		$model = $connection->createCommand($sql);
+		$model = $connection->createCommand($sql); 
+	 	 
 		$count = $model->queryScalar();  
 		
 		return $count; 
@@ -590,11 +634,11 @@ class BookingRules extends \yii\db\ActiveRecord
 		
 		if(in_array($facilityID, $functionRooms)) {
 			if($facilityID == 28) {
-				// $funRoom = array(28,32,33); // remove 29, 30, 31
-				$funRoom = array(28, 29, 30);
+				$funRoom = array(28,32,33); // remove 29, 30, 31
+				// $funRoom = array(28, 29, 30);
 			} elseif($facilityID == 29) {
-				// $funRoom = array(29,31,32,33);
-				$funRoom = array(28, 29, 31, 32, 33);
+				$funRoom = array(29,31,32,33);
+				// $funRoom = array(28, 29, 31, 32, 33);
 			} elseif($facilityID == 30) {
 				$funRoom = array(30,32,33);
 			} elseif($facilityID == 31) {
