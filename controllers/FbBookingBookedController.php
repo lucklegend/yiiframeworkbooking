@@ -386,33 +386,19 @@ class FbBookingBookedController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 			$model->created = date('Y-m-d H:i:s');
-			 $model->save();
+			$model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } elseif (Yii::$app->request->get('hash')) {
 			$data = Yii::$app->request->get();
 			if($data['hash'] == md5($data['facid'].$data['tid'])){
 				$slotFrom = date('Y-m-d H:i:s', $data['tid']);
-				//print_r($data); 
+				
 				$brules = new BookingRules();
-				//echo $userId; exit;
 				$checkSave = $brules->checkSave($data['facid'],$userId, $slotFrom);
 				$_POST = $checkSave;
-				//print_r($checkSave); 
-				//exit;
-				//echo 'hi';
+
 				if($checkSave['can'] == 1){
-				//	echo 'hi';
-					//$model->loadMultiple($checkSave);
-					//foreach($checkSave as $key => $value){
-						//echo 'hi';
-						/*if($model->hasProperty($key)){
-							$model->$key = $value;
-							echo $model->$key;
-							echo 'hi';
-						}*/
-						//$key;
-						//echo $value;
-					//}
+
 					$model->user_id = $checkSave['user_id'];
 					$model->facility_id = $checkSave['facility_id'];
 					$model->slot_from = $checkSave['slot_from'];
@@ -423,26 +409,19 @@ class FbBookingBookedController extends Controller
 					$model->created = $checkSave['created'];
 					$model->created_by = $checkSave['created_by'];
 					$model->status = $checkSave['status'];
-					
-				   // print_r ($mailtemp); exit;
-				    /*$mail = new MailTemplate();
-					echo $mailtemp = $mail->sendMail(1, $userId, array($model->facility_id, $model->slot_from, $model->slot_to));
-					exit;*/
-					//$model->save();
-					 
+
 					if($model->save()){
 						$mail = new MailTemplate();
 						$mailtemp = $mail->sendMail(1, $userId, array($model->facility_id, $model->slot_from, $model->slot_to));
 					}
-					//print_r($model); 
-                    //exit;
-                    
+
                     if($model->facility0->group == '18' || $model->facility0->group == '41'){
                         return $this->redirect(['view', 'id' => $model->id]);
-
                     }
 					return $this->redirect(['payment', 'id' => $model->id]);
 				}
+                
+
 			} else {
 				return $this->render('create', [
 					'model' => $model,

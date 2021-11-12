@@ -94,7 +94,7 @@ class BookingController extends \yii\web\Controller
 			//print_r($daySlot); 
 			if (is_array($daySlot)) {
 				foreach ($daySlot as $slottime => $slotDetails) {
-
+					
 					$Event = new \yii2fullcalendar\models\Event();
 					$tid =  strtotime($slotdate . ' ' . $slottime);
 

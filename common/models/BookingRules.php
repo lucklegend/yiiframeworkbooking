@@ -340,17 +340,17 @@ class BookingRules extends \yii\db\ActiveRecord
     function checkSave($facilityID, $user = 0, $date = '', $isAdmin = false){
 		//exit;
 		$created_by		= Yii::$app->user->identity->id;
-		$facility 		= $this->facility($facilityID);
-		$bookDate		= date('Y-m-d', strtotime($date));
-		$bookTime		= date('H:i:s', strtotime($date));
+		$facility 		= $this->facility($facilityID); // get the FbBookingFacility datas
+		$bookDate			= date('Y-m-d', strtotime($date));
+		$bookTime			= date('H:i:s', strtotime($date));
 
-		$getPeak 		= $this->getPeak123($facilityID, $bookDate, $bookTime);
-		$closed 		= $this->closingFac($facilityID, $bookDate);
-		$countBooked 	= $this->countBooked($facilityID, $user, $date);
-		$ckeckRules 	= $this->ckeckRules($facilityID, $user, $date);
-		$booked 		= $this->alreadyBooked($facilityID, $date);
+		$getPeak 			= $this->getPeak123($facilityID, $bookDate, $bookTime); //get all the data in fb_booking_slot
+		$closed 			= $this->closingFac($facilityID, $bookDate); // get data in fbBookingClosingday records.
+		$countBooked 	= $this->countBooked($facilityID, $user, $date); // get data of peak, non peak and total & total no of days, week and month. 
+		$ckeckRules 	= $this->ckeckRules($facilityID, $user, $date); // check if the data have a peak, non-peak and allday.
+		$booked 			= $this->alreadyBooked($facilityID, $date); // can be used as doing the booking of north and south.
 		
-		$peak 			= $getPeak['peak']?1:0;
+		$peak 				= $getPeak['peak']?1:0;
 		$unit_time		= $facility->unit_time;
 		$lapse_date		= $facility->lapse_date;
 		
@@ -358,16 +358,16 @@ class BookingRules extends \yii\db\ActiveRecord
 		//print_r($slot);
 		//		exit;
 		$data = array();
-		$data['user_id'] 		= $user;
+		$data['user_id'] 			= $user;
 		$data['facility_id'] 	= $facilityID;
 		$data['slot_from'] 		= $date;
-		$data['slot_to'] 		= date('Y-m-d H:i:s', strtotime("+$unit_time minute", strtotime($date)));
+		$data['slot_to'] 			= date('Y-m-d H:i:s', strtotime("+$unit_time minute", strtotime($date)));
 		$data['lapse_date'] 	= $lapse_date ? date('Y-m-d H:i:s', strtotime("+$lapse_date days", strtotime($date))) : NULL;
-		$data['lasttime_book'] 	= 0;
-		$data['peak'] 			= $peak;
-		$data['created'] 		= date('Y-m-d H:i:s');
+		$data['lasttime_book'] = 0;
+		$data['peak'] 				= $peak;
+		$data['created'] 			= date('Y-m-d H:i:s');
 		$data['created_by'] 	= $created_by;
-		$data['status'] 		= $facility->default_status;
+		$data['status'] 			= $facility->default_status;
 		
 		if($closed['closeday'] || $ckeckRules['allday'] || $booked){
 			$data['can'] 	= 0;
@@ -590,11 +590,11 @@ class BookingRules extends \yii\db\ActiveRecord
 		
 		if(in_array($facilityID, $functionRooms)) {
 			if($facilityID == 28) {
-				// $funRoom = array(28,32,33); // remove 29, 30, 31
-				$funRoom = array(28, 29, 30);
+				$funRoom = array(28,32,33); // remove 29, 30, 31
+				// $funRoom = array(28, 29, 30);
 			} elseif($facilityID == 29) {
-				// $funRoom = array(29,31,32,33);
-				$funRoom = array(28, 29, 31, 32, 33);
+				$funRoom = array(29,31,32,33);
+				// $funRoom = array(28, 29, 31, 32, 33);
 			} elseif($facilityID == 30) {
 				$funRoom = array(30,32,33);
 			} elseif($facilityID == 31) {
