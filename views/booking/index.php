@@ -112,9 +112,12 @@ foreach ($facil as $fa) {
 ?>
 	<div>
 		<!-- showing the name of facility -->
-		<h3 class="h3"> <?php echo  $fa["name"];
-									}   ?> </h3>
+		<h3 class="h3"> <?php echo  $fa["name"]; ?></h3>
 	</div>
+<?php 
+}   
+?> 
+	
 
 	<?php
 	$facID = Yii::$app->request->get('facid');
@@ -157,7 +160,7 @@ foreach ($facil as $fa) {
 			],
 		]);
 	}
-
+	echo '<script>console.log(' . json_encode($calendar['events']) . ');</script>';
 	// $greenbooking = array(14, 18, 28, 29, 24, 26);
 	$greenbooking = array(14, 18, 28, 29);
 	$lightgreenbooking = array (24, 26, 27, 38);

@@ -258,29 +258,28 @@ class BookingRules extends \yii\db\ActiveRecord
 	}
 
     function getCalendar($facilityID, $user = 0, $dateStart = '', $dateEnd = '', $isAdmin = false){
-		//exit;
-		//$time_start = microtime(true);  //for time debug
 		
 		$facility 		= $this->facility($facilityID); // get the FbBookingFacility records
 		$slotTimes 		= $this->slotTimes($facilityID); // get the Start and end Date Time
 		$bookday_start 	= $facility->bookday_start; // get on database bookday_start
 		$bookday_end 	= $facility->bookday_end; // get on database bookday_end
 		
-//		print_r($slotTimes);
-//		exit;
-		
 		$facDayStart 	= date('Y-m-d', strtotime("+$bookday_start days", strtotime(date('Y-m-d')))); // add number of days in database to present dates
 		if ($dateStart == '' || $dateStart == '0000-00-00' || $dateStart < $facDayStart) $dateStart = $facDayStart;
 		$facDayEnd 		= date('Y-m-d', strtotime("+$bookday_end days", strtotime(date('Y-m-d')))); // add number of days in the database (2,3,30,60) to the present dates
 		if($dateEnd == '' || $dateEnd == '0000-00-00' || $dateEnd > $facDayEnd) $dateEnd = $facDayEnd;
 		
+		//containers
 		$boxes = array();
-		for($date = $dateStart;$date <= $dateEnd; $date = date('Y-m-d', strtotime('+1 days', strtotime($date)))){
-			//echo $date;
+
+		// Fetch all the dates based on the database if its 2, 3, 30, or 60 days. Get all the dates from day 0 or 3 of todays date up to day N
+		for($date = $dateStart; $date <= $dateEnd; $date = date('Y-m-d', strtotime('+1 days', strtotime($date)))){
+			
 			$closed 		= $this->closingFac($facilityID, $date); // get data in fbBookingClosingday records.
 			$countBooked 	= $this->countBooked($facilityID, $user, $date); // get data of peak, non peak and total & total no of days, week and month. 
 			$ckeckRules 	= $this->ckeckRules($facilityID, $user, $date); // check if the data have a peak, non-peak and allday.
 			
+			// fetch all scheduled date base on database. its either 60, 360
 			foreach($slotTimes as $skey => $slot){
 				$slotTime 	= $date . ' ' . $this->floatToTime($slot['start']);
 				$room	 	= $this->chkRoom($facilityID, $date , $this->floatToTime($slot['start']) , $this->floatToTime($slot['end']) );  // get the fb_booking_booked data using start time and end time.
@@ -333,6 +332,7 @@ class BookingRules extends \yii\db\ActiveRecord
 		$boxes['timeEnd'] 	= $this->floatToTime($slotTimes[$totalSlot]['end']);
 		//print_r($boxes);
 		//echo '<br>Total execution time in seconds: ' . (microtime(true) - $time_start);
+		echo '<script>console.log(' . json_encode($boxes) . ');</script>';
 		return $boxes;
 		
 	}
@@ -438,8 +438,6 @@ class BookingRules extends \yii\db\ActiveRecord
 		return $count; 
 	}
 
-
-	
 	function checkRulesLimit($facilityID = 0, $user = NULL, $date = '', $peak = 0, $type = 1){
 		
 		//print_r($subject); exit;
