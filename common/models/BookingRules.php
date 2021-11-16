@@ -89,7 +89,7 @@ class BookingRules extends \yii\db\ActiveRecord
 			$where['facility'] = $facilityID;
 			$where['group'] = $facility->group;
 		} 
-		
+		//check if group or facility ID for the where clause
 		$AllRules = FbBookingRules::find()->where($where)->all();
 
 		return $AllRules;
@@ -137,7 +137,9 @@ class BookingRules extends \yii\db\ActiveRecord
 				//echo $sql . "<br>\n"; 
 				// exit;
 				$model = $connection->createCommand($sql);
+				//1 = day 2 = week 3 = month
 				$count[$$tkey][$$pkey] = $model->queryScalar();
+				// $count[$tkey][$pkey] = $model->queryScalar();
 			}
 		}
 		
@@ -147,8 +149,6 @@ class BookingRules extends \yii\db\ActiveRecord
 	
 	function ckeckRules($facilityID, $user=NULL, $date){
 		$facility = $this->facility($facilityID); // get the FbBookingFacility datas
-    $modelRules 	= new FbBookingRules(); 
-    $modelFacility 	= new FbBookingFacility();
 		$blocklimit = array('nonpeak' => 0, 'peak' => 0, 'allday' => 0, 0 => 0, 1 => 0, 2 => 0);
 		
 		$allRules = $this->allRules($facilityID); // get the data in FbBookingRules
@@ -177,7 +177,7 @@ class BookingRules extends \yii\db\ActiveRecord
 					}
 				}
 			}
-			
+			// constant rule for allday 
 			if($blocklimit['allday'] == 1) {
 				$blocklimit['nonpeak'] = 1;
 				$blocklimit['peak'] = 1;
@@ -265,19 +265,26 @@ class BookingRules extends \yii\db\ActiveRecord
 		$bookday_end 	= $facility->bookday_end; // get on database bookday_end
 		
 		$facDayStart 	= date('Y-m-d', strtotime("+$bookday_start days", strtotime(date('Y-m-d')))); // add number of days in database to present dates
-		if ($dateStart == '' || $dateStart == '0000-00-00' || $dateStart < $facDayStart) $dateStart = $facDayStart;
+		if($dateStart == '' || $dateStart == '0000-00-00' || $dateStart < $facDayStart) $dateStart = $facDayStart;
 		$facDayEnd 		= date('Y-m-d', strtotime("+$bookday_end days", strtotime(date('Y-m-d')))); // add number of days in the database (2,3,30,60) to the present dates
 		if($dateEnd == '' || $dateEnd == '0000-00-00' || $dateEnd > $facDayEnd) $dateEnd = $facDayEnd;
 		
 		//containers
 		$boxes = array();
-
+	
 		// Fetch all the dates based on the database if its 2, 3, 30, or 60 days. Get all the dates from day 0 or 3 of todays date up to day N
 		for($date = $dateStart; $date <= $dateEnd; $date = date('Y-m-d', strtotime('+1 days', strtotime($date)))){
 			
-			$closed 		= $this->closingFac($facilityID, $date); // get data in fbBookingClosingday records.
+			$closed 			= $this->closingFac($facilityID, $date); // get data in fbBookingClosingday records.
 			$countBooked 	= $this->countBooked($facilityID, $user, $date); // get data of peak, non peak and total & total no of days, week and month. 
 			$ckeckRules 	= $this->ckeckRules($facilityID, $user, $date); // check if the data have a peak, non-peak and allday.
+			
+			// check the data of count booked.
+			$encodeJson = json_encode($ckeckRules);
+			echo '<script>
+							console.log('.$date.');
+							console.log('.$encodeJson .');
+						</script>';
 			
 			// fetch all scheduled date base on database. its either 60, 360
 			foreach($slotTimes as $skey => $slot){
@@ -334,7 +341,6 @@ class BookingRules extends \yii\db\ActiveRecord
 		//echo '<br>Total execution time in seconds: ' . (microtime(true) - $time_start);
 		echo '<script>console.log(' . json_encode($boxes) . ');</script>';
 		return $boxes;
-		
 	}
    
     function checkSave($facilityID, $user = 0, $date = '', $isAdmin = false){

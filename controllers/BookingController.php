@@ -72,7 +72,9 @@ class BookingController extends \yii\web\Controller
 
 		if ($facID < 1 || $userId < 1) return NULL;
 		$cRules = new BookingRules();
+		//get the dateEnd, dateStart, events, slotDuration, TimeEnd, and TimeStart based on the facid
 		$allSlots = $cRules->getCalendar($facID, $userId);
+		// get the FbBookingFacility datas
 		$facgrp = $cRules->facility($facID);
 
 		$calendar = array();
@@ -89,6 +91,7 @@ class BookingController extends \yii\web\Controller
 
 		$events = array();
 
+		// disect all slots into pieces.
 		foreach ($allSlots as $slotdate => $daySlot) {
 			// echo $slotdate;
 			// print_r($daySlot); 
@@ -173,6 +176,7 @@ class BookingController extends \yii\web\Controller
 		$calendar['events'] = $events;
 		// print_r($events);
 		// exit();
+		echo '<script>console.log(' . json_encode($calendar) . ');</script>';
 		return $calendar;
 	}
 
