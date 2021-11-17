@@ -259,16 +259,16 @@ class BookingRules extends \yii\db\ActiveRecord
 
     function getCalendar($facilityID, $user = 0, $dateStart = '', $dateEnd = '', $isAdmin = false){
 		
-		$facility 		= $this->facility($facilityID); // get the FbBookingFacility records
-		$slotTimes 		= $this->slotTimes($facilityID); // get the Start and end Date Time
+		$facility 			= $this->facility($facilityID); // get the FbBookingFacility records
+		$slotTimes 			= $this->slotTimes($facilityID); // get the Start and end Date Time
 		$bookday_start 	= $facility->bookday_start; // get on database bookday_start
-		$bookday_end 	= $facility->bookday_end; // get on database bookday_end
+		$bookday_end 		= $facility->bookday_end; // get on database bookday_end
 		
 		$facDayStart 	= date('Y-m-d', strtotime("+$bookday_start days", strtotime(date('Y-m-d')))); // add number of days in database to present dates
 		if($dateStart == '' || $dateStart == '0000-00-00' || $dateStart < $facDayStart) $dateStart = $facDayStart;
 		$facDayEnd 		= date('Y-m-d', strtotime("+$bookday_end days", strtotime(date('Y-m-d')))); // add number of days in the database (2,3,30,60) to the present dates
 		if($dateEnd == '' || $dateEnd == '0000-00-00' || $dateEnd > $facDayEnd) $dateEnd = $facDayEnd;
-		
+
 		//containers
 		$boxes = array();
 	
@@ -282,9 +282,25 @@ class BookingRules extends \yii\db\ActiveRecord
 			// check the data of count booked.
 			$encodeJson = json_encode($ckeckRules);
 			echo '<script>
+							console.log(' . $facilityID . ');
 							console.log('.$date.');
 							console.log('.$encodeJson .');
 						</script>';
+			//for North and South Function Rooms only.
+			if ($facilityID == 28) {
+				$secondFacid = 29;
+				echo '<script>console.log("yes its 29 going 28 now.");</script>';
+				if ($ckeckRules['nonpeak'] == 0 && $ckeckRules['peak'] == 0 && $ckeckRules['allday'] == 0) {
+					$ckeckRules 	= $this->ckeckRules($secondFacid, $user, $date);
+				}
+			} elseif ($facilityID == 29) {
+				echo '<script>console.log("yes its 29 going 28 now.");</script>';
+				$secondFacid = 28;
+				if ($ckeckRules['nonpeak'] == 0 && $ckeckRules['peak'] == 0 && $ckeckRules['allday'] == 0) {
+					$ckeckRules 	= $this->ckeckRules($secondFacid, $user, $date);
+				}
+			} else {
+			}
 			
 			// fetch all scheduled date base on database. its either 60, 360
 			foreach($slotTimes as $skey => $slot){
@@ -299,20 +315,20 @@ class BookingRules extends \yii\db\ActiveRecord
 				//print_r($slot);
 				 
 				$box = new \stdClass();
-				$box->start 				= $this->floatToTime($slot['start']);
-				$box->end 					= $this->floatToTime($slot['end']);
-				$box->closed 				= $closed['closeday'];
-				$box->closedText 			= $closed['closetext'];
-				$box->peak 					= $getPeak;
-				$box->nonPeak				= $getNonPeak;
-				$box->blocknonpeak 			= $ckeckRules['nonpeak'];
-				$box->blockpeak 			= $ckeckRules['peak'];
-				$box->blockallday 			= $ckeckRules['allday'];
-				$box->alreadyReserved 		= $booked;
+				$box->start 								= $this->floatToTime($slot['start']);
+				$box->end 									= $this->floatToTime($slot['end']);
+				$box->closed 								= $closed['closeday'];
+				$box->closedText 						= $closed['closetext'];
+				$box->peak 									= $getPeak;
+				$box->nonPeak								= $getNonPeak;
+				$box->blocknonpeak 					= $ckeckRules['nonpeak'];
+				$box->blockpeak 						= $ckeckRules['peak'];
+				$box->blockallday 					= $ckeckRules['allday'];
+				$box->alreadyReserved 			= $booked;
 				$box->alreadyReservedUser 	= $bkduser;
-				$box->chkRoom 				= $room;
-				$box->barr	 				= $barr;
-				$box->reserveLimit 	= 1;
+				$box->chkRoom 							= $room;
+				$box->barr	 								= $barr;
+				$box->reserveLimit 					= 1;
 				
 				if($box->alreadyReserved){
 					$box->canReserve 	= 0;
@@ -339,6 +355,7 @@ class BookingRules extends \yii\db\ActiveRecord
 		$boxes['timeEnd'] 	= $this->floatToTime($slotTimes[$totalSlot]['end']);
 		//print_r($boxes);
 		//echo '<br>Total execution time in seconds: ' . (microtime(true) - $time_start);
+		echo '<script>console.log("boxes:");</script>';
 		echo '<script>console.log(' . json_encode($boxes) . ');</script>';
 		return $boxes;
 	}
