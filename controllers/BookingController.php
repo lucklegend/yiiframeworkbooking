@@ -176,8 +176,8 @@ class BookingController extends \yii\web\Controller
 		$calendar['events'] = $events;
 		// print_r($events);
 		// exit();
-		echo '<script>console.log("Calendar: ");</script>';
-		echo '<script>console.log(' . json_encode($calendar) . ');</script>';
+		// echo '<script>console.log("Calendar: ");</script>';
+		// echo '<script>console.log(' . json_encode($calendar) . ');</script>';
 		return $calendar;
 	}
 

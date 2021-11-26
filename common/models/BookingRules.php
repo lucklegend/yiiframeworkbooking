@@ -81,7 +81,7 @@ class BookingRules extends \yii\db\ActiveRecord
 		$facility = $this->facility($facilityID); // get the FbBookingFacility datas
 		
 		$where = array();
-		if($facility->rulestype == 1){
+		if($facility->rulestype == 1){ // 1 and 0, 0 is for tennis and pool room.
 			$where['facility'] = $facilityID;
 		} elseif ($facility->rulestype == 0){
 			$where['group'] = $facility->group;
@@ -153,9 +153,9 @@ class BookingRules extends \yii\db\ActiveRecord
 		
 		$allRules = $this->allRules($facilityID); // get the data in FbBookingRules
 		$countBooked = $this->countBooked($facilityID, $user, $date); // get data of peak, non peak and total & total no of days, week and month. 
-		//print_r($allRules); 
-		//print_r($countBooked); 
-		//exit;
+		
+		echo '<script>console.log('.json_encode($countBooked).')</script>';
+		
 		if(is_array($allRules)){
 			foreach($allRules as $rule){
 				//print_r($countBooked)."<br>";
@@ -163,7 +163,6 @@ class BookingRules extends \yii\db\ActiveRecord
 		
 				if($countBooked[$rule->range_type][$rule->peak] >= $rule->range_limit){
 					//$blocklimit[$rule->peak] = 1;
-
 					if($rule->peak == 0){
 						$blocklimit['nonpeak'] = 1;
 					} elseif($rule->peak == 1){
@@ -271,7 +270,7 @@ class BookingRules extends \yii\db\ActiveRecord
 
 		//containers
 		$boxes = array();
-	
+		$count = 1;
 		// Fetch all the dates based on the database if its 2, 3, 30, or 60 days. Get all the dates from day 0 or 3 of todays date up to day N
 		for($date = $dateStart; $date <= $dateEnd; $date = date('Y-m-d', strtotime('+1 days', strtotime($date)))){
 			
@@ -281,20 +280,22 @@ class BookingRules extends \yii\db\ActiveRecord
 			
 			// check the data of count booked.
 			$encodeJson = json_encode($ckeckRules);
+			$date2 = date('Y-m-d', strtotime($date));
 			echo '<script>
-							console.log(' . $facilityID . ');
+							console.log(' . $count . ');
 							console.log('.$date.');
 							console.log('.$encodeJson .');
 						</script>';
+			$count++;
 			//for North and South Function Rooms only.
 			if ($facilityID == 28) {
 				$secondFacid = 29;
-				echo '<script>console.log("yes its 29 going 28 now.");</script>';
+			
 				if ($ckeckRules['nonpeak'] == 0 && $ckeckRules['peak'] == 0 && $ckeckRules['allday'] == 0) {
 					$ckeckRules 	= $this->ckeckRules($secondFacid, $user, $date);
 				}
 			} elseif ($facilityID == 29) {
-				echo '<script>console.log("yes its 29 going 28 now.");</script>';
+				
 				$secondFacid = 28;
 				if ($ckeckRules['nonpeak'] == 0 && $ckeckRules['peak'] == 0 && $ckeckRules['allday'] == 0) {
 					$ckeckRules 	= $this->ckeckRules($secondFacid, $user, $date);
@@ -355,8 +356,9 @@ class BookingRules extends \yii\db\ActiveRecord
 		$boxes['timeEnd'] 	= $this->floatToTime($slotTimes[$totalSlot]['end']);
 		//print_r($boxes);
 		//echo '<br>Total execution time in seconds: ' . (microtime(true) - $time_start);
-		echo '<script>console.log("boxes:");</script>';
-		echo '<script>console.log(' . json_encode($boxes) . ');</script>';
+		
+		// echo '<script>console.log("boxes:");</script>';
+		// echo '<script>console.log(' . json_encode($boxes) . ');</script>';
 		return $boxes;
 	}
    
