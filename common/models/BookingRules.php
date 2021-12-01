@@ -107,11 +107,11 @@ class BookingRules extends \yii\db\ActiveRecord
 		
 		if($facility->rulestype == 1){
 			$where .= ' and `facility_id` = ' . $facilityID;
-		} elseif(count($this->allFacilities($facilityID, true)) > 0){
+		} elseif(count($this->allFacilities($facilityID, true)) > 0){ // return all facility_Id in FbBookingFacility all with the same group id; 
 			$where .= ' and `facility_id` IN (' . implode(',', $this->allFacilities($facilityID, true)) . ')';
 		} 
 		
-		$where .= ' and `status` IN (' . implode(',', $this->canStatus()) . ')';
+		$where .= ' and `status` IN (' . implode(',', $this->canStatus()) . ')'; // return array in all FbBookingStatus where can book = 0; waiting, approved, absent and illegal cancellation
 		$sqlPeak = array();
 		$sqlPeak['nonpeak'] .= ' and `peak` = 0';
 		$sqlPeak['peak']	.= ' and `peak` = 1';
@@ -138,7 +138,7 @@ class BookingRules extends \yii\db\ActiveRecord
 				// exit;
 				$model = $connection->createCommand($sql);
 				//1 = day 2 = week 3 = month
-				$count[$$tkey][$$pkey] = $model->queryScalar();
+				$count[$$tkey][$$pkey] = $model->queryScalar(); // queryScalar = shows only the first row in the first column of data.
 				// $count[$tkey][$pkey] = $model->queryScalar();
 			}
 		}
@@ -153,9 +153,10 @@ class BookingRules extends \yii\db\ActiveRecord
 		
 		$allRules = $this->allRules($facilityID); // get the data in FbBookingRules
 		$countBooked = $this->countBooked($facilityID, $user, $date); // get data of peak, non peak and total & total no of days, week and month. 
-		
+		$newSdate = date('l - Y-m-d', strtotime($date));
 		echo '<script>
-						console.log(' . $date . ');
+						var newDate = "yehey '.$newSdate. ' nice";
+						console.log(newDate);
 						console.log('.json_encode($countBooked).');
 					</script>';
 		
@@ -273,7 +274,7 @@ class BookingRules extends \yii\db\ActiveRecord
 
 		//containers
 		$boxes = array();
-		$count = 1;
+		
 		// Fetch all the dates based on the database if its 2, 3, 30, or 60 days. Get all the dates from day 0 or 3 of todays date up to day N
 		for($date = $dateStart; $date <= $dateEnd; $date = date('Y-m-d', strtotime('+1 days', strtotime($date)))){
 			
@@ -285,12 +286,11 @@ class BookingRules extends \yii\db\ActiveRecord
 			$encodeJson = json_encode($ckeckRules);
 			$date2 = date('Y-m-d', strtotime($date));
 			echo '<script>
-							console.log(' . $count . ');
-							console.log('.$date.');
+							var dateStart = "oras ito: '.$dateStart. ' whala";
+							console.log(dateStart);
 							console.log('.$encodeJson .');
 						</script>';
-			$count++;
-			//for North and South Function Rooms only.
+					//for North and South Function Rooms only.
 			if ($facilityID == 28) {
 				$secondFacid = 29;
 			
@@ -746,9 +746,12 @@ class BookingRules extends \yii\db\ActiveRecord
 		$dto = new \DateTime();
 		$week = date('W', strtotime($date));
 		$year = date("Y",strtotime($date));
-		$result['start'] = $dto->setISODate($year, $week, 0)->format('Y-m-d');
-		$result['end'] = $dto->setISODate($year, $week, 6)->format('Y-m-d');
+		$result['start'] = $dto->setISODate($year, $week, 1)->format('Y-m-d');
+		$result['end'] = $dto->setISODate($year, $week, 7)->format('Y-m-d');
 		//print_r($result);
+		echo '<script>
+						console.log('.json_encode($result).');
+					</script>';
 		return $result;
 	}
 	
