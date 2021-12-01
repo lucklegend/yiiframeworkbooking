@@ -154,7 +154,10 @@ class BookingRules extends \yii\db\ActiveRecord
 		$allRules = $this->allRules($facilityID); // get the data in FbBookingRules
 		$countBooked = $this->countBooked($facilityID, $user, $date); // get data of peak, non peak and total & total no of days, week and month. 
 		
-		echo '<script>console.log('.json_encode($countBooked).')</script>';
+		echo '<script>
+						console.log(' . $date . ');
+						console.log('.json_encode($countBooked).');
+					</script>';
 		
 		if(is_array($allRules)){
 			foreach($allRules as $rule){
