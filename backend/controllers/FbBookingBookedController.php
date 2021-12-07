@@ -356,6 +356,11 @@ class FbBookingBookedController extends Controller
 	
 	public function actionView($id)
 	{
+        echo '<script>
+            console.log("dito oh :");
+            console.log('.json_encode($this->findModel($id)).');
+            </script>';
+            // var_dump($this->findModel($id));
 		if (Yii::$app->request->isAjax) {
 			return $this->renderAjax('view', [
 				'model' => $this->findModel($id),

@@ -154,6 +154,10 @@ class FbBookingBooked extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Profiles::className(), ['user_id' => 'cancelled_by']);
     }
+    public function getCancel2()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'cancelled_by']);
+    }
 		public function getMethod()
     {
         return $this->hasOne(FbBookingPaymentMethod::className(), ['id' => 'payment_method_id']);
@@ -165,6 +169,21 @@ class FbBookingBooked extends \yii\db\ActiveRecord
 	public function getStatus2()
     {
         return $this->hasOne(FbBookingStatus::className(), ['id' => 'status']);
+    }
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+        if($this->status == 3){
+            $this->cancelled_time = date('Y-m-d h:i:s');
+            $this->cancelled_by = Yii::$app->user->getId();
+            $this->updateAttributes(['cancelled_by', 'cancelled_time']);
+        }else{
+            $this->cancelled_time = NULL;
+            $this->cancelled_by = '';
+            $this->updateAttributes(['cancelled_by', 'cancelled_time']);
+        }
+        
     }
 
 }

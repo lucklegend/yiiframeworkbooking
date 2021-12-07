@@ -109,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'cancelled_by',
 			[
 		    'attribute'=>'cancelled_by',
-			'value' => $model->cancelled_by == '' ? 'NA' : $model->cancel->name
+			'value' => $model->cancelled_by == '' ? 'NA' : $model->cancel2->username
 			],
            // 'cancelled_reason',
 			[
