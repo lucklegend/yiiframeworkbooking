@@ -391,14 +391,16 @@ class FbBookingBookedController extends Controller
         } elseif (Yii::$app->request->get('hash')) {
 			$data = Yii::$app->request->get();
 			if($data['hash'] == md5($data['facid'].$data['tid'])){
+               
 				$slotFrom = date('Y-m-d H:i:s', $data['tid']);
-				
+                echo 'here 1414 <Br>';
 				$brules = new BookingRules();
 				$checkSave = $brules->checkSave($data['facid'],$userId, $slotFrom);
+                echo 'here 2 <Br>';
 				$_POST = $checkSave;
-
+                
 				if($checkSave['can'] == 1){
-
+                    echo 'here wow <Br>';
 					$model->user_id = $checkSave['user_id'];
 					$model->facility_id = $checkSave['facility_id'];
 					$model->slot_from = $checkSave['slot_from'];
@@ -416,18 +418,23 @@ class FbBookingBookedController extends Controller
 					}
 
                     if($model->facility0->group == '18' || $model->facility0->group == '41'){
+                        echo 'here 41 <Br>';
                         return $this->redirect(['view', 'id' => $model->id]);
                     }
-					return $this->redirect(['payment', 'id' => $model->id]);
+                    echo 'here payments <Br>';
+					return $this->redirect(array('payment', 'id' => $model->id));
+                    echo 'ayaw gumana par.';
 				}
                 
 
 			} else {
+                echo 'here create <Br>';
 				return $this->render('create', [
 					'model' => $model,
 				]);
 			}
         } else {
+            echo 'here create 2 <Br>';
             return $this->render('create', [
                 'model' => $model,
             ]);

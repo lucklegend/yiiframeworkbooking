@@ -124,7 +124,7 @@ class BookingRules extends \yii\db\ActiveRecord
 		$day = 1;
 		$week = 2;
 		$month = 3;
-		
+
 		$sqlType = array();
 		$sqlType['day'] 	= " and `slot_from` like '%" . $date . "%'";
 		$sqlType['week'] 	= " and `slot_from` between '" . $weekdays['start'] . " 00:00:00' and '" . $weekdays['end'] . " 23:59:00'";
@@ -137,6 +137,7 @@ class BookingRules extends \yii\db\ActiveRecord
 				// type = slot from between = day, week month
 				// pValue = peak = 0, peak =1
 				$sql = 'SELECT count(`id`) as total FROM `fb_booking_booked` WHERE ' . $where . $type . $pValue;
+				// echo '<script>console.log("'.$sql.'")</script>';
 				//echo $sql . "<br>\n"; 
 				$model = $connection->createCommand($sql);
 				//1 = day 2 = week 3 = month
@@ -155,22 +156,17 @@ class BookingRules extends \yii\db\ActiveRecord
 		$allRules = $this->allRules($facilityID); // get the data in FbBookingRules
 		$countBooked = $this->countBooked($facilityID, $user, $date); // get data of peak, non peak and total & total no of days, week and month. 
 		$newSdate = date('l - Y-m-d', strtotime($date));
-		echo '<script>
-						var newDate = "yehey '.$newSdate. ' nice";
-						console.log(newDate);
-						console.log('.json_encode($countBooked).');
-					</script>';
+		// echo '<script>
+		// 				var newDate = "yehey '.$newSdate. ' nice";
+		// 				console.log(newDate);
+		// 				console.log('.json_encode($countBooked).');
+		// 			</script>';
 		
 		if(is_array($allRules)){
 			foreach($allRules as $rule){
 				//print_r($countBooked)."<br>";
 				//echo $countBooked[$rule->range_type][$rule->peak] ." >= " .$rule->range_limit ."<br>";
-				echo '<script>
-					console.log("start");
-					console.log('. $countBooked[$rule->range_type][$rule->peak]. ');
-					console.log('. $rule->range_limit.');
-					console.log("tapos");
-				</script>';
+
 				if($countBooked[$rule->range_type][$rule->peak] >= $rule->range_limit){
 					//$blocklimit[$rule->peak] = 1;
 					if($rule->peak == 0){
@@ -266,7 +262,7 @@ class BookingRules extends \yii\db\ActiveRecord
  
 	}
 
-    function getCalendar($facilityID, $user = 0, $dateStart = '', $dateEnd = '', $isAdmin = false){
+  function getCalendar($facilityID, $user = 0, $dateStart = '', $dateEnd = '', $isAdmin = false){
 		
 		$facility 			= $this->facility($facilityID); // get the FbBookingFacility records
 		$slotTimes 			= $this->slotTimes($facilityID); // get the Start and end Date Time
@@ -291,12 +287,13 @@ class BookingRules extends \yii\db\ActiveRecord
 			// check the data of count booked.
 			$encodeJson = json_encode($ckeckRules);
 			$date2 = date('Y-m-d', strtotime($date));
-			echo '<script>
-							var dateStart = "Date today is: '. $date2. ' ehe";
-							console.log(dateStart);
-							console.log('.$encodeJson .');
-						</script>';
-					//for North and South Function Rooms only.
+			// echo '<script>
+			// 				var dateStart = "Date today is: '. $date2. ' ehe";
+			// 				console.log(dateStart);
+			// 				console.log('.$encodeJson .');
+			// 			</script>';
+			
+						//for North and South Function Rooms only.
 			if ($facilityID == 28) {
 				$secondFacid = 29;
 			
@@ -365,13 +362,11 @@ class BookingRules extends \yii\db\ActiveRecord
 		$boxes['timeEnd'] 	= $this->floatToTime($slotTimes[$totalSlot]['end']);
 		//print_r($boxes);
 		//echo '<br>Total execution time in seconds: ' . (microtime(true) - $time_start);
-		
-		// echo '<script>console.log("boxes:");</script>';
-		// echo '<script>console.log(' . json_encode($boxes) . ');</script>';
+
 		return $boxes;
 	}
    
-    function checkSave($facilityID, $user = 0, $date = '', $isAdmin = false){
+  function checkSave($facilityID, $user = 0, $date = '', $isAdmin = false){
 		//exit;
 		$created_by		= Yii::$app->user->identity->id;
 		$facility 		= $this->facility($facilityID); // get the FbBookingFacility datas
@@ -751,13 +746,16 @@ class BookingRules extends \yii\db\ActiveRecord
 	function weekStartEnd($date){
 		$dto = new \DateTime();
 		$week = date('W', strtotime($date));
+		
 		$year = date("Y",strtotime($date));
-		$result['start'] = $dto->setISODate($year, $week, 1)->format('Y-m-d');
-		$result['end'] = $dto->setISODate($year, $week, 7)->format('Y-m-d');
-		//print_r($result);
-		echo '<script>
-				console.log('.json_encode($result).');
-		</script>';
+		$day = date('d', strtotime($date));
+		$month = date('m', strtotime($date));
+		if($week == 52 && $month == 1){
+			$year = $year-1;
+		}
+		$result['start'] = $dto->setDate($year, $month, $day)->setISODate($year, $week, 1)->format('Y-m-d');
+		$result['end'] = $dto->setDate($year, $month, $day)->setISODate($year, $week, 7)->format('Y-m-d');
+		
 		return $result;
 	}
 	

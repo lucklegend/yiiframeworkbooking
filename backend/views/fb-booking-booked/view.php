@@ -134,7 +134,8 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created',
 			[
 		    'attribute'=>'created',
-			'format' => ['date', 'php:d M Y h:ia']
+			// 'format' => ['date', 'php:d M Y h:ia']
+			'value' => date('d F Y h:ia', strtotime($model->created)),
 			],
            // 'created_by', 
             /* [
