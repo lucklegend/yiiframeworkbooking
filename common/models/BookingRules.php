@@ -105,7 +105,7 @@ class BookingRules extends \yii\db\ActiveRecord
 
 		$where 		 = " `user_id` = '" . $user . "'";
 		
-		if($facility->rulestype == 1){
+		if($facility->rulestype == 1){ // if not pool or tennis
 			$where .= ' and `facility_id` = ' . $facilityID;
 		} elseif(count($this->allFacilities($facilityID, true)) > 0){ // return all facility_Id in FbBookingFacility all with the same group id; 
 			$where .= ' and `facility_id` IN (' . implode(',', $this->allFacilities($facilityID, true)) . ')';
@@ -133,18 +133,19 @@ class BookingRules extends \yii\db\ActiveRecord
 		//print_r($sqlType);
 		foreach($sqlType as $tkey => $type){		// day, week, month
 			foreach($sqlPeak as $pkey => $pValue){	// Peak, non peak
+				// where = in facility_id IN = and status IN
+				// type = slot from between = day, week month
+				// pValue = peak = 0, peak =1
 				$sql = 'SELECT count(`id`) as total FROM `fb_booking_booked` WHERE ' . $where . $type . $pValue;
 				//echo $sql . "<br>\n"; 
-				// exit;
 				$model = $connection->createCommand($sql);
 				//1 = day 2 = week 3 = month
+				// it returns 1 or 0 depends on the seen in query.
 				$count[$$tkey][$$pkey] = $model->queryScalar(); // queryScalar = shows only the first row in the first column of data.
 				// $count[$tkey][$pkey] = $model->queryScalar();
 			}
 		}
-		
 		return $count;
-		
 	}
 	
 	function ckeckRules($facilityID, $user=NULL, $date){
@@ -164,7 +165,12 @@ class BookingRules extends \yii\db\ActiveRecord
 			foreach($allRules as $rule){
 				//print_r($countBooked)."<br>";
 				//echo $countBooked[$rule->range_type][$rule->peak] ." >= " .$rule->range_limit ."<br>";
-		
+				echo '<script>
+					console.log("start");
+					console.log('. $countBooked[$rule->range_type][$rule->peak]. ');
+					console.log('. $rule->range_limit.');
+					console.log("tapos");
+				</script>';
 				if($countBooked[$rule->range_type][$rule->peak] >= $rule->range_limit){
 					//$blocklimit[$rule->peak] = 1;
 					if($rule->peak == 0){
@@ -286,7 +292,7 @@ class BookingRules extends \yii\db\ActiveRecord
 			$encodeJson = json_encode($ckeckRules);
 			$date2 = date('Y-m-d', strtotime($date));
 			echo '<script>
-							var dateStart = "oras ito: '.$dateStart. ' whala";
+							var dateStart = "Date today is: '. $date2. ' ehe";
 							console.log(dateStart);
 							console.log('.$encodeJson .');
 						</script>';
@@ -750,8 +756,8 @@ class BookingRules extends \yii\db\ActiveRecord
 		$result['end'] = $dto->setISODate($year, $week, 7)->format('Y-m-d');
 		//print_r($result);
 		echo '<script>
-						console.log('.json_encode($result).');
-					</script>';
+				console.log('.json_encode($result).');
+		</script>';
 		return $result;
 	}
 	
